@@ -1,1 +1,5 @@
-# progtech-gyak
+# Fejlesztők
+
+- Deli Daniella
+- Kiss Lili
+- Nyirfa Báint
