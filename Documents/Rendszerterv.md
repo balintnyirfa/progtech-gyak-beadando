@@ -22,10 +22,48 @@ A program célja az is, hogy egyszerűen használható legyen, és kényelmesen 
 
 ## 7. Adatbázis terv
 
+![image](https://github.com/balintnyirfa/progtech-gyak-beadando/assets/99401028/7a2ab44f-5d80-4b53-87aa-f089a71d6c38)
+
 ## 8. Tesztterv 
+Az alkalmazás teszteléséhez **unit teszteket** fogunk alkalmazni, ami a programkód zömét lefedi. 
+A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesztelése.
+
+- Adatbázis tesztelése
+- Adatok beolvasása és visszaadása
+- Linkek és gombok tesztelése
+- CRUD műveletek tesztelése
+- Biztonság ellenőrzése (megfelelően vannak-e védve az adatok, jelszó titkosítva van-e, kijelentkezés ellenőrzése)
+- Hibaüzenetek tesztelése (felhasználó által bevitt hibás adatok esetén)
+
+
+| Teszt neve                          | Eredmény       |
+|-------------------------------------|----------------|
+| `Regisztráció helyes adatokkal`     |                |
+| `Regisztráció helytelen adatokkal`  |                |
+| `Bejelentkezés helyes adatokkal`    |                |
+| `Bejelentkezés helytelen adatokkal` |                |
+| `Naptár létrehozása`                |                |
+| `Naptár megjelenítése`              |                |
+| `Esemény létrehozása`               |                |
+| `Esemény módosítása`                |                |
+| `Esemény törlése`                   |                |
+| `Események megjelenítése`           |                |
+| `Kijelentkezés`                     |                |
 
 ## 9. Telepítési terv
+Nem szükséges telepítés az alkalmazás használatához.
 
 ## 10. Implementációs terv
+Az alkalmazást Java programnyelven implementáljuk, a felhasználók adatait MySQL adatbázisban fogjuk eltárolni, phpMyAdmin-t használva.
+
+### Funkciók:
+
+- Regisztráció
+- Bejelentkezés
+- Kijelentkezés
+- Jelszóváltoztatás
+- Naptár létrehozása, megtekintése
+- Esemény létrehozása, megtekintése, módosítása, törlése
+- Felhasználó értesítése adott eseményről
 
 ## 11. Karbantartási terv
