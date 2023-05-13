@@ -108,4 +108,11 @@ public class RegisterPage extends JDialog{
 
         return user;
     }
+
+    public static void main(String[] args) {
+
+        RegisterPage reg = new RegisterPage(null);
+        reg.setVisible(true);
+
+    }
 }

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.PanelUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,10 @@ public class SignInPage extends JDialog{
     private JButton signInBtn;
     private JButton backButton;
     private JPanel signInPanel;
+    private JPanel emailField;
+    private JPanel passwordField;
+    private JButton registerButton;
+    private JLabel regLabel;
 
     public SignInPage (JFrame parent) {
         super(parent);
@@ -19,6 +24,13 @@ public class SignInPage extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setForeground(Color.white);
+
+        //emailText.setSize(20, 20);
+        /*registerButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        registerButton.setBorderPainted(false);
+        registerButton.setBorder(BorderFactory.createRaisedSoftBevelBorder());*/
+
 
         signInBtn.addActionListener(new ActionListener() {
             @Override
@@ -46,6 +58,15 @@ public class SignInPage extends JDialog{
             }
         });
         setVisible(true);
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                RegisterPage reg = new RegisterPage(null);
+                reg.setVisible(true);
+            }
+        });
     }
 
     public User user;
