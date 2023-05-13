@@ -9,6 +9,12 @@ A program célja az is, hogy egyszerűen használható legyen, és kényelmesen 
 ## 3. Üzleti folyamatok modellje
 
 ## 4. Követelmények
+ - Felhasználók, naptár adatok tárolása adatbázisban
+ - Napi, heti, havi naptár létrehozása
+ - Események módosítása, törlése, létrehozása
+ - Hozzáadott események megjelenítése
+ - Esemény közeledtével a felhasználó értesítése
+ - Adatvédelem
 
 ## 5. Funkcionális terv 
 
