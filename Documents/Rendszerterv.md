@@ -1,6 +1,8 @@
 # Rendszerterv
 
 ## 1. A rendszer célja
+A rendszer célja az, hogy lehetővé tegye a felhasználók számára, hogy interaktívan megjelenítsék a naptárt, és azon navigáljanak az időben. A program lehetővé    teszi a felhasználók számára, hogy különböző naptárakat tudjon létrehozni (napi, heti, havi). Illetve lehetőséget ad arra, hogy eseményeket hozzon létre, töröljön és módosítani is tudja a már meglévőeket.
+A program célja az is, hogy egyszerűen használható legyen, és kényelmesen kezelhető legyen a felhasználók számára. Ezen felül, a program segítségével a felhasználók könnyen áttekinthetik a fontos dátumokat és eseményeket, így a program lehetővé teszi a hatékonyabb időtervezést és szervezést.
 
 ## 2. Projektterv
 
