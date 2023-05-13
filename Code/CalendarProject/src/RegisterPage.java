@@ -82,7 +82,7 @@ public class RegisterPage extends JDialog{
         try{
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement stm = conn.createStatement();
-            String sql = "INSERT INTO user(username, email, firstname, lastname, password) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO user(username, email, firstname, lastname, password) VALUES (?,?,?,?, md5(?))";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, email);
@@ -107,9 +107,5 @@ public class RegisterPage extends JDialog{
         }
 
         return user;
-    }
-
-    public static void main(String[] args){
-        RegisterPage reg = new RegisterPage(null);
     }
 }
