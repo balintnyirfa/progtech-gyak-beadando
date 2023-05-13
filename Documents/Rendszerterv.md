@@ -21,10 +21,35 @@ A program célja az is, hogy egyszerűen használható legyen, és kényelmesen 
 ## 6. Fizikai környezet
 
 ## 7. Adatbázis terv
-
+.
 ## 8. Tesztterv 
+Az alkalmazás teszteléséhez **unit teszteket** fogunk alkalmazni, ami a programkód zömét lefedi. 
+A tesztek elsődleges célja: az eddig meglévő funkcióknak, metódusoknak tesztelése.
+
+- Adatbázis tesztelése
+- Adatok beolvasása és visszaadása
+- Linkek és gombok tesztelése
+- CRUD műveletek tesztelése
+- Biztonság ellenőrzése (megfelelően vannak-e védve az adatok, jelszó titkosítva van-e, kijelentkezés ellenőrzése)
+- Hibaüzenetek tesztelése (felhasználó által bevitt hibás adatok esetén)
+
+
+| Teszt neve                          | Eredmény       |
+|-------------------------------------|----------------|
+| `Regisztráció helyes adatokkal`     |                |
+| `Regisztráció helytelen adatokkal`  |                |
+| `Bejelentkezés helyes adatokkal`    |                |
+| `Bejelentkezés helytelen adatokkal` |                |
+| `Naptár létrehozása`                |                |
+| `Naptár megjelenítése`              |                |
+| `Esemény létrehozása`               |                |
+| `Esemény módosítása`                |                |
+| `Esemény törlése`                   |                |
+| `Események megjelenítése`           |                |
+| `Kijelentkezés`                     |                |
 
 ## 9. Telepítési terv
+Nem szükséges telepítés az alkalmazás használatához.
 
 ## 10. Implementációs terv
 
