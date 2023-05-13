@@ -65,6 +65,7 @@ public class RegisterPage extends JDialog{
 
         if(user != null){
             JOptionPane.showMessageDialog(this, "Sikeres regisztráció!");
+            //Bejelentkezésre átvinni
             dispose();
         }
         else {
@@ -74,6 +75,36 @@ public class RegisterPage extends JDialog{
 
     private User addUserToDatabase(String username, String email, String firstname, String lastname, String password) {
         User user = null;
+        final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
+        final String USERNAME = "root";
+        final String PASSWORD = "";
+
+        try{
+            Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            Statement stm = conn.createStatement();
+            String sql = "INSERT INTO user(username, email, firstname, lastname, password) VALUES (?,?,?,?,?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, firstname);
+            preparedStatement.setString(4, lastname);
+            preparedStatement.setString(5, password);
+
+            int addedRows = preparedStatement.executeUpdate();
+            if(addedRows > 0){
+                user = new User();
+                user.setUsername(username);
+                user.setEmail(email);
+                user.setFirstname(firstname);
+                user.setLastname(lastname);
+                user.setPassword(password);
+            }
+            stm.close();
+            conn.close();
+        }
+        catch (Exception exception){
+            System.out.println(exception.getMessage());
+        }
 
         return user;
     }
