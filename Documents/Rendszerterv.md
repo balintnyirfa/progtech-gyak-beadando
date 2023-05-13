@@ -52,5 +52,16 @@ A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesz
 Nem szükséges telepítés az alkalmazás használatához.
 
 ## 10. Implementációs terv
+Az alkalmazást Java programnyelven implementáljuk, a felhasználók adatait MySQL adatbázisban fogjuk eltárolni, phpMyAdmin-t használva.
+
+### Funkciók:
+
+- Regisztráció
+- Bejelentkezés
+- Kijelentkezés
+- Jelszóváltoztatás
+- Naptár létrehozása, megtekintése
+- Esemény létrehozása, megtekintése, módosítása, törlése
+- Felhasználó értesítése adott eseményről
 
 ## 11. Karbantartási terv
