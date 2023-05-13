@@ -24,7 +24,7 @@ A program célja az is, hogy egyszerűen használható legyen, és kényelmesen 
 .
 ## 8. Tesztterv 
 Az alkalmazás teszteléséhez **unit teszteket** fogunk alkalmazni, ami a programkód zömét lefedi. 
-A tesztek elsődleges célja: az eddig meglévő funkcióknak, metódusoknak tesztelése.
+A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesztelése.
 
 - Adatbázis tesztelése
 - Adatok beolvasása és visszaadása
