@@ -22,7 +22,7 @@ A program célja az is, hogy egyszerűen használható legyen, és kényelmesen 
 
 ## 7. Adatbázis terv
 
-![database](https://github.com/balintnyirfa/progtech-gyak-beadando/assets/99401028/802f1634-d952-4dbf-8b3f-fad17e4e0a81)
+![image](https://github.com/balintnyirfa/progtech-gyak-beadando/assets/99401028/7a2ab44f-5d80-4b53-87aa-f089a71d6c38)
 
 ## 8. Tesztterv 
 Az alkalmazás teszteléséhez **unit teszteket** fogunk alkalmazni, ami a programkód zömét lefedi. 
