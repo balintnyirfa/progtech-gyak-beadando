@@ -21,7 +21,9 @@ A program célja az is, hogy egyszerűen használható legyen, és kényelmesen 
 ## 6. Fizikai környezet
 
 ## 7. Adatbázis terv
-.
+
+![database](https://github.com/balintnyirfa/progtech-gyak-beadando/assets/99401028/802f1634-d952-4dbf-8b3f-fad17e4e0a81)
+
 ## 8. Tesztterv 
 Az alkalmazás teszteléséhez **unit teszteket** fogunk alkalmazni, ami a programkód zömét lefedi. 
 A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesztelése.
