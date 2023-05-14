@@ -57,7 +57,7 @@ public class SignInPage extends JDialog{
                 dispose();
             }
         });
-        setVisible(true);
+
 
         registerButton.addActionListener(new ActionListener() {
             @Override
@@ -67,6 +67,7 @@ public class SignInPage extends JDialog{
                 reg.setVisible(true);
             }
         });
+        setVisible(true);
     }
 
     public User user;
@@ -81,7 +82,7 @@ public class SignInPage extends JDialog{
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
 
             Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM users WHERE email=? AND password=?";
+            String sql = "SELECT * FROM user WHERE email=? AND password=md5(?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);

@@ -38,6 +38,8 @@ public class RegisterPage extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                SignInPage signInPage = new SignInPage(null);
+                signInPage.setVisible(true);
             }
         });
 
