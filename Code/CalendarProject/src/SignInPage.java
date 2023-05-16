@@ -101,6 +101,9 @@ public class SignInPage extends JDialog{
             e.printStackTrace();
         }
 
+        this.dispose();
+        HomePage homePage = new HomePage(null);
+        homePage.setVisible(true);
         return user;
 
     }
