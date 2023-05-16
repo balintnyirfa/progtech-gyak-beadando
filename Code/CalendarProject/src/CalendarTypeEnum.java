@@ -1,5 +1,5 @@
 public enum CalendarTypeEnum {
-    Daily,
-    Weekly,
-    Monthly
+    NAPI,
+    HETI,
+    HAVI
 }
