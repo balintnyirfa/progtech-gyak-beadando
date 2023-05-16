@@ -67,7 +67,8 @@ public class RegisterPage extends JDialog{
 
         if(user != null){
             JOptionPane.showMessageDialog(this, "Sikeres regisztráció!");
-            //Bejelentkezésre átvinni
+            SignInPage signInPage = new SignInPage(null);
+            signInPage.setVisible(true);
             dispose();
         }
         else {
