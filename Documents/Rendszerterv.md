@@ -5,6 +5,9 @@ A rendszer célja az, hogy lehetővé tegye a felhasználók számára, hogy int
 A program célja az is, hogy egyszerűen használható legyen, és kényelmesen kezelhető legyen a felhasználók számára. Ezen felül, a program segítségével a felhasználók könnyen áttekinthetik a fontos dátumokat és eseményeket, így a program lehetővé teszi a hatékonyabb időtervezést és szervezést.
 
 ## 2. Projektterv
+Ezt az alkalmazást Java nyelven valósítjuk meg, melyhez társítunk egy grafikus felületet is. Egyaránt dolgozunk mindannyian front- és backenden is.
+- A frontend-el azt szeretnénk elérni, hogy egy könnyen átlátható, de mégis szép design-t kapjon az app.
+- A backend célja, hogy a háttérben zajló folyamatokat le tudjuk programozni, Java kód megírása, a program helyes működését biztosítjuk.
 
 ## 3. Üzleti folyamatok modellje
 
