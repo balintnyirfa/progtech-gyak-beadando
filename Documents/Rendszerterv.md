@@ -19,9 +19,16 @@ Ezt az alkalmazást Java nyelven valósítjuk meg, melyhez társítunk egy grafi
  - Esemény közeledtével a felhasználó értesítése
  - Adatvédelem
 
-## 5. Funkcionális terv 
+## 5. Funkcionális terv
+- Vendég: Lényegében csak regisztrálni tud és az app további részéhez nem tud hozzáférni, amíg ez a feltétel nem teljesül és nem jelentkezik be a fiókjával.
+- Felhasználó: Sikeres regisztráció és bejelentkezés után hozzá tud férni az alkalmazás nyújtotta szolgáltatásokhoz. Tud a naptárhoz új eseményeket rendelni, amiket később el tud érni és tudja ezeket módosítani.
 
 ## 6. Fizikai környezet
+Az igénybevételéhez szükség van regisztrációhoz, anélkül nem lehet hozzáférni az app által nyújtott szolgáltatásokhoz.
+- Van tűzfal a hálózaton, és minden portot engedélyez.
+- Nincsenek megvásárolt komponenseink
+- Fejlesztői eszközök:
+ - IntelliJ IDEA 2023.1.1
 
 ## 7. Adatbázis terv
 
