@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public abstract class Calendar {
+public abstract class CalendarAbstract {
 
     private int ID;
     private String title;

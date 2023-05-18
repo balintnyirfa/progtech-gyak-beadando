@@ -1,4 +1,4 @@
-public class DailyCalendar extends Calendar{
+public class DailyCalendar extends CalendarAbstract {
     /*
     @Override
     public Calendar createCalendar() {

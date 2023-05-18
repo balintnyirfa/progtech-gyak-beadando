@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 //import org.jdatepicker.JDatePicker;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+import com.toedter.calendar.JDateChooser;
+//import org.jdatepicker.impl.JDatePanelImpl;
+//import org.jdatepicker.impl.JDatePickerImpl;
+//import org.jdatepicker.impl.UtilDateModel;
 
-import java.util.Properties;
+import java.util.Calendar;
 
 public class CreateCalendar extends JDialog{
 
@@ -13,14 +14,12 @@ public class CreateCalendar extends JDialog{
     private JTextField calendarTitle;
     private JComboBox<CalendarTypeEnum> calendarTypeComboBox;
     private JButton createCalendar_btn;
+    private JPanel startDateChooserJP;
+    private JPanel endDateChooserJP;
 
-    //dátum kiválasztása és kezelése
-    UtilDateModel model = new UtilDateModel();
-
-    //naptár kiválasztó panel konfigurációja
-    Properties properties = new Properties();
-    JDatePanelImpl datePanel = new JDatePanelImpl(model, properties);
-    JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, null);  //testre lehet szabni
+    Calendar cld = Calendar.getInstance(); //Aktuális dátum
+    JDateChooser startDateChooser = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
+    JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
     public CreateCalendar(JFrame parent) {
         super(parent);
@@ -30,25 +29,26 @@ public class CreateCalendar extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        startDateChooserJP.add(startDateChooser);
+        endDateChooserJP.add(endDateChooser);
 
-        //CreateCalendarPanel.add(datePicker);
 
         setVisible(true);
     }
 
     //Napi naptár
     CalendarFactory dailyCalendarFactory = new DailyCalendarFactory();
-    Calendar dailyCalendar = dailyCalendarFactory.createCalendar();
+    CalendarAbstract dailyCalendar = dailyCalendarFactory.createCalendar();
 
 
     //Heti naptár
     CalendarFactory weeklyCalendarFactory = new WeeklyCalendarFactory();
-    Calendar weeklyCalendar = weeklyCalendarFactory.createCalendar();
+    CalendarAbstract weeklyCalendar = weeklyCalendarFactory.createCalendar();
 
 
     //Havi naptár
     CalendarFactory monthlyCalendarFactory = new MonthlyCalendarFactory();
-    Calendar monthlyCalendar = monthlyCalendarFactory.createCalendar();
+    CalendarAbstract monthlyCalendar = monthlyCalendarFactory.createCalendar();
 
 
     private void createUIComponents() {

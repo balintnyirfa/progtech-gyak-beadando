@@ -1,4 +1,4 @@
 public interface CalendarFactory {
-    Calendar createCalendar();
+    CalendarAbstract createCalendar();
 
 }

@@ -1,6 +1,6 @@
 public class WeeklyCalendarFactory implements CalendarFactory{
     @Override
-    public Calendar createCalendar() {
+    public CalendarAbstract createCalendar() {
         return new WeeklyCalendar();
     }
 }

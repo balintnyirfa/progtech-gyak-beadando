@@ -1,6 +1,6 @@
 public class DailyCalendarFactory implements CalendarFactory{
     @Override
-    public Calendar createCalendar() {
+    public CalendarAbstract createCalendar() {
         return new DailyCalendar();
     }
 }

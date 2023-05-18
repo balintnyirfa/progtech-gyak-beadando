@@ -1,6 +1,6 @@
 public class MonthlyCalendarFactory implements CalendarFactory{
     @Override
-    public Calendar createCalendar() {
+    public CalendarAbstract createCalendar() {
         return new MonthlyCalendar();
     }
 }
