@@ -67,7 +67,6 @@ Nem szükséges telepítés az alkalmazás használatához.
 Az alkalmazást Java programnyelven implementáljuk, a felhasználók adatait MySQL adatbázisban fogjuk eltárolni, phpMyAdmin-t használva.
 
 ### Funkciók:
-
 - Regisztráció
 - Bejelentkezés
 - Kijelentkezés
@@ -77,3 +76,6 @@ Az alkalmazást Java programnyelven implementáljuk, a felhasználók adatait My
 - Felhasználó értesítése adott eseményről
 
 ## 11. Karbantartási terv
+- Egyes bugok javítása
+- Design korszerűsítése
+- Újabb, frissebb megoldások implementálása
