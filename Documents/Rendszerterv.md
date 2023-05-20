@@ -11,6 +11,8 @@ Ezt az alkalmazást Java nyelven valósítjuk meg, melyhez társítunk egy grafi
 
 ## 3. Üzleti folyamatok modellje
 
+![prog_tech-uzleti_folyamatok_terve](https://github.com/balintnyirfa/progtech-gyak-beadando/assets/78541351/bde13a6e-10d5-4d30-878b-562afbc03f62)
+
 ## 4. Követelmények
  - Felhasználók, naptár adatok tárolása adatbázisban
  - Napi, heti, havi naptár létrehozása
