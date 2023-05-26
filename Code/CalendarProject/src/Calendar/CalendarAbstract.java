@@ -1,8 +1,10 @@
 package Calendar;
 
-import java.util.Date;
+import classes.Event;
 
-public abstract class CalendarAbstract {
+import java.util.*;
+
+public abstract class CalendarAbstract extends Observable {
 
     private int ID;
     private String title;
@@ -64,6 +66,8 @@ public abstract class CalendarAbstract {
         this.to_date = to_date;
     }
 
+    List<Observer> observerList = new ArrayList<>();
+    List<Event> eventList = new ArrayList<>();
 
     //public abstract Calendar createCalendar();    ---> CalendarFactoryben lesz
 
