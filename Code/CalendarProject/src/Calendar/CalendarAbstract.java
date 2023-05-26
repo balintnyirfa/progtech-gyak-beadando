@@ -11,7 +11,10 @@ public abstract class CalendarAbstract {
     private Date from_date;
     private Date to_date;
 
-
+    public CalendarAbstract(int user_id)
+    {
+        this.user_id = user_id;
+    }
 
     public int getID() {
         return ID;
