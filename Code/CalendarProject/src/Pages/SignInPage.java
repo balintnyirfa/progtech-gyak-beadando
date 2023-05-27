@@ -1,3 +1,5 @@
+package Pages;
+
 import classes.User;
 
 import javax.swing.*;

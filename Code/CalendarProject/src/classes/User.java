@@ -1,6 +1,11 @@
 package classes;
 
-public class User {
+import Calendar.CalendarAbstract;
+
+import java.util.Observable;
+import java.util.Observer;
+
+public class User implements Observer {
     private int ID;
     private String Username;
     private String Firstname;
@@ -54,5 +59,10 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        CalendarAbstract calendar = (CalendarAbstract) o;
     }
 }
