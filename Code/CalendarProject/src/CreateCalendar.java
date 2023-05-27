@@ -58,7 +58,7 @@ public class CreateCalendar extends JDialog{
         endDateChooserJP.add(endDateChooser);
 
         // Naptár létrehozása
-        CalendarTypeEnum type = Enum.valueOf(CalendarTypeEnum.class, calendarTypeComboBox.getName());
+        CalendarTypeEnum type = (CalendarTypeEnum) calendarTypeComboBox.getSelectedItem();
         Date from_date = Date.valueOf(startDateChooserJP.getName());
         Date to_date = Date.valueOf(endDateChooserJP.getName());
         String title = calendarTitle.getText();
