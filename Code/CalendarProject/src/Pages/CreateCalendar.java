@@ -27,6 +27,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 //import java.util.Date;
 import java.sql.Date;
@@ -44,9 +45,9 @@ public class CreateCalendar extends JDialog{
     JDateChooser startDateChooser = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
+
     public CalendarAbstract cal;
     public User user;
-
 
     public CreateCalendar(JFrame parent) {
         super(parent);
@@ -56,34 +57,44 @@ public class CreateCalendar extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        createUIComponents();
+        calendarTypeComboBox.setSelectedItem(CalendarTypeEnum.NAPI);
         startDateChooserJP.add(startDateChooser);
         endDateChooserJP.add(endDateChooser);
 
         // Naptár létrehozása
         CalendarTypeEnum type = (CalendarTypeEnum) calendarTypeComboBox.getSelectedItem();
-        Date from_date = Date.valueOf(startDateChooserJP.getName());
-        Date to_date = Date.valueOf(endDateChooserJP.getName());
+
+        java.util.Date startDate = startDateChooser.getDate();
+        java.sql.Date from_date = new java.sql.Date(startDate.getTime());
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //String fromDateStr = dateFormat.format(startDate);
+        //Date from_date = Date.valueOf(fromDateStr);
+
+        java.util.Date endDate = endDateChooser.getDate();
+        java.sql.Date to_date = new java.sql.Date(endDate.getTime());
+
         String title = calendarTitle.getText();
-
-        if(cal != null){
-            JOptionPane.showMessageDialog(this, "Sikeres létrehozás!");
-            HomePage home = new HomePage(null);
-            home.setVisible(true);
-            dispose();
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Sikertelen létrehozás!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (title.isEmpty())
-        {
-            JOptionPane.showMessageDialog(this, "A cím nem maradhat üresen!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
         createCalendar_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(cal != null){
+                    JOptionPane.showMessageDialog(null, "Sikeres létrehozás!");
+                    HomePage home = new HomePage(null);
+                    home.setVisible(true);
+                    dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Sikertelen létrehozás!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                if (title.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null, "A cím nem maradhat üresen!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 cal = addCalendarToDatabase(user.getID(), type, from_date, to_date, title);
 
                 switch (type) {
@@ -110,9 +121,6 @@ public class CreateCalendar extends JDialog{
     }
 
 
-    private void createUIComponents() {
-        calendarTypeComboBox = new JComboBox<>(CalendarTypeEnum.values());
-    }
 
     private CalendarAbstract addCalendarToDatabase(int user_id, CalendarTypeEnum type, Date from_date, Date to_date, String title) {
         CalendarAbstract cal = null;
@@ -151,4 +159,8 @@ public class CreateCalendar extends JDialog{
     }
 
 
+    private void createUIComponents() {
+        calendarTypeComboBox = new JComboBox<>(CalendarTypeEnum.values());
+        setVisible(true);
+    }
 }
