@@ -40,7 +40,12 @@ public class SignInPage extends JDialog{
             public void actionPerformed(ActionEvent e) {
                 String email = emailText.getText();
                 String password = String.valueOf(passwordText.getPassword());
-                
+
+                if (email.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(SignInPage.this, "Az összes mezőt ki kell tölteni!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 user = getAuthenticatedUser(email, password);
 
                 if (user != null) {
@@ -73,8 +78,9 @@ public class SignInPage extends JDialog{
         setVisible(true);
     }
 
-    public static User user;
+    public User user;
     private User getAuthenticatedUser(String email, String password) {
+        User user = null;
 
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -93,8 +99,6 @@ public class SignInPage extends JDialog{
 
             if (resultSet.next()) {
                 user = new User();
-                //Tudjuk, hogy melyik user csinál majd naptárat!
-                user.setID(resultSet.getInt(1));
                 user.getEmail();
                 user.getPassword();
             }
