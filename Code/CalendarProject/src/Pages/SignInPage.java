@@ -78,9 +78,8 @@ public class SignInPage extends JDialog{
         setVisible(true);
     }
 
-    public User user;
+    public static User user;
     private User getAuthenticatedUser(String email, String password) {
-        User user = null;
 
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -99,6 +98,7 @@ public class SignInPage extends JDialog{
 
             if (resultSet.next()) {
                 user = new User();
+                user.setID(resultSet.getInt(1));
                 user.getEmail();
                 user.getPassword();
             }
