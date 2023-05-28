@@ -69,9 +69,15 @@
         </constraints>
         <properties>
           <autoscrolls value="false"/>
+          <editable value="false"/>
+          <enabled value="true"/>
           <font name="Consolas" size="12"/>
           <foreground color="-16162149"/>
-          <model/>
+          <model>
+            <item value="NAPI"/>
+            <item value="HETI"/>
+            <item value="HAVI"/>
+          </model>
         </properties>
       </component>
       <component id="20877" class="javax.swing.JTextField" binding="calendarTitle">
