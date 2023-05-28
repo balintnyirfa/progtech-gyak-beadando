@@ -17,7 +17,6 @@ import Calendar.CalendarTypeEnum;
 import Calendar.DailyCalendarFactory;
 import Calendar.WeeklyCalendarFactory;
 import Calendar.MonthlyCalendarFactory;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.Authenticator;
@@ -28,9 +27,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Calendar;
 //import java.util.Date;
 import java.sql.Date;
+import java.util.Objects;
+
+import static Calendar.CalendarTypeEnum.*;
+import static Pages.SignInPage.user;
 
 public class CreateCalendar extends JDialog{
 
@@ -50,20 +56,6 @@ public class CreateCalendar extends JDialog{
 
 
     public CalendarAbstract cal;
-    public User user;
-
-    public CalendarTypeEnum EnumPicker(String selectedModelValue, CalendarTypeEnum type)
-    {
-        switch (selectedModelValue){
-            case "NAPI":
-                type = CalendarTypeEnum.NAPI;
-            case "HETI":
-                type = CalendarTypeEnum.HETI;
-            case "HAVI":
-                type = CalendarTypeEnum.HAVI;
-        }
-        return type;
-    }
 
     public CreateCalendar(JFrame parent) {
         super(parent);
@@ -73,10 +65,8 @@ public class CreateCalendar extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        comboBox = new JComboBox<>();
         startDateChooserJP.add(startDateChooser);
         endDateChooserJP.add(endDateChooser);
-
 
         createCalendar_btn.addActionListener(new ActionListener() {
             @Override
@@ -93,9 +83,19 @@ public class CreateCalendar extends JDialog{
     {
         // Naptár létrehozása
 
-        String selectedtype = (String) comboBox.getSelectedItem();
         CalendarTypeEnum cte = null;
-        CalendarTypeEnum type = EnumPicker(selectedtype, cte);
+        if (comboBox.getModel().getSelectedItem() == "NAPI")
+        {
+            cte = NAPI;
+        }
+        else if (comboBox.getModel().getSelectedItem() == "HETI")
+        {
+            cte = HETI;
+        }
+        else if (comboBox.getModel().getSelectedItem() == "HAVI")
+        {
+            cte = HAVI;
+        }
 
         java.util.Date startDate = startDateChooser.getDate();
         java.sql.Date from_date = new java.sql.Date(startDate.getTime());
@@ -114,16 +114,27 @@ public class CreateCalendar extends JDialog{
             JOptionPane.showMessageDialog(this, "A cím nem maradhat üresen!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         if (from_date.getTime() > to_date.getTime())
         {
             JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (type == CalendarTypeEnum.NAPI && from_date.equals(to_date))
+
+        long daysBetween = (to_date.getTime() - from_date.getTime()) / (1000 * 60 * 60 * 24);
+        if (comboBox.getModel().getSelectedItem() == "NAPI" && from_date.equals(to_date))
         {
             CalendarFactory dailyCalendarFactory = new DailyCalendarFactory();
             CalendarAbstract dailyCalendar = dailyCalendarFactory.createCalendar(user.getID());
+        }
+        else if (comboBox.getModel().getSelectedItem() == "HETI" && daysBetween == 7)
+        {
+            CalendarFactory weeklyCalendarFactory = new WeeklyCalendarFactory();
+            CalendarAbstract weeklyCalendar = weeklyCalendarFactory.createCalendar(user.getID());
+        }
+        else if (comboBox.getModel().getSelectedItem() == "HAVI" && (daysBetween == 30 || daysBetween == 31))
+        {
+            CalendarFactory monthlyCalendarFactory = new MonthlyCalendarFactory();
+            CalendarAbstract monthlyCalendar = monthlyCalendarFactory.createCalendar(user.getID());
         }
         else {
             JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
@@ -131,7 +142,7 @@ public class CreateCalendar extends JDialog{
         }
 
 
-        cal = addCalendarToDatabase(user.getID(), type, from_date, to_date, title);
+        cal = addCalendarToDatabase(user.getID(), cte, from_date, to_date, title);
 
         if(cal != null){
             JOptionPane.showMessageDialog(this, "Sikeres létrehozás!");
@@ -141,24 +152,6 @@ public class CreateCalendar extends JDialog{
         }
         else {
             JOptionPane.showMessageDialog(this, "Sikertelen létrehozás!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        switch (type) {
-            case NAPI:
-                //Napi naptár
-                CalendarFactory dailyCalendarFactory = new DailyCalendarFactory();
-                CalendarAbstract dailyCalendar = dailyCalendarFactory.createCalendar(user.getID());
-                break;
-            case HETI:
-                //Heti naptár
-                CalendarFactory weeklyCalendarFactory = new WeeklyCalendarFactory();
-                CalendarAbstract weeklyCalendar = weeklyCalendarFactory.createCalendar(user.getID());
-                break;
-            case HAVI:
-                //Havi naptár
-                CalendarFactory monthlyCalendarFactory = new MonthlyCalendarFactory();
-                CalendarAbstract monthlyCalendar = monthlyCalendarFactory.createCalendar(user.getID());
-                break;
         }
     }
 
