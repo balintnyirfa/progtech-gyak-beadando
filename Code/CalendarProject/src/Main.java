@@ -1,3 +1,4 @@
+import Pages.AddEventPage;
 import Pages.CreateCalendar;
 import Pages.SignInPage;
 
@@ -9,5 +10,6 @@ public class Main {
         //CreateCalendar cr = new CreateCalendar(null);
         //HomePage h = new HomePage(null);
         //RegisterPage reg = new RegisterPage(null);
+        //AddEventPage a = new AddEventPage(null);
     }
 }
