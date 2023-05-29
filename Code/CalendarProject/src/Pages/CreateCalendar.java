@@ -72,11 +72,9 @@ public class CreateCalendar extends JDialog{
         createCalendar_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CreateCalendar();
+                CreateACalendar();
             }
         });
-
-        setVisible(true);
 
         visszaButton.addActionListener(new ActionListener() {
             @Override
@@ -86,9 +84,11 @@ public class CreateCalendar extends JDialog{
                 h.setVisible(true);
             }
         });
+
+        setVisible(true);
     }
 
-    private void CreateCalendar()
+    private void CreateACalendar()
     {
         // Naptár létrehozása
 

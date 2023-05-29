@@ -59,8 +59,6 @@ public class ListCalendarsPage extends JDialog {
             //JDBCTutorialUtilities.printSQLException(e);
         }
 
-
-        setVisible(true);
         visszaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,5 +67,7 @@ public class ListCalendarsPage extends JDialog {
                 h.setVisible(true);
             }
         });
+
+        setVisible(true);
     }
 }
