@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Máj 28. 19:37
+-- Létrehozás ideje: 2023. Máj 29. 19:30
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.2.0
 
@@ -30,11 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `calendar` (
   `ID` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `type` text NOT NULL,
+  `type` enum('NAPI','HETI','HAVI') NOT NULL,
   `from_date` date NOT NULL,
   `to_date` date NOT NULL,
   `title` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `calendar`
+--
+
+INSERT INTO `calendar` (`ID`, `user_id`, `type`, `from_date`, `to_date`, `title`) VALUES
+(1, 4, 'NAPI', '2023-05-29', '2023-05-29', 'asd'),
+(2, 4, 'HETI', '2023-05-29', '2023-06-05', 'asddsds'),
+(3, 4, 'HAVI', '2023-05-30', '2023-06-30', 'cckcgck,c');
 
 -- --------------------------------------------------------
 
@@ -111,7 +120,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT a táblához `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `event`
