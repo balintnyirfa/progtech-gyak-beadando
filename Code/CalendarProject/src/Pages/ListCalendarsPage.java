@@ -5,11 +5,14 @@ import classes.User;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class ListCalendarsPage extends JDialog {
     private JPanel ListCalendarsPanel;
     private JTable CalendarsTable;
+    private JButton visszaButton;
     private JPanel CalendarsPanel;
 
     private User user;
@@ -17,7 +20,7 @@ public class ListCalendarsPage extends JDialog {
     public ListCalendarsPage(JFrame parent){
         super(parent);
         setTitle("Naptáraim");
-        setContentPane(CalendarsPanel);
+        setContentPane(ListCalendarsPanel);
         setMinimumSize(new Dimension(450, 500));
         setModal(true);
         setLocationRelativeTo(parent);
@@ -58,5 +61,13 @@ public class ListCalendarsPage extends JDialog {
 
 
         setVisible(true);
+        visszaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                HomePage h = new HomePage(null);
+                h.setVisible(true);
+            }
+        });
     }
 }

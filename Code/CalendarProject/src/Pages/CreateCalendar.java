@@ -49,6 +49,7 @@ public class CreateCalendar extends JDialog{
     private JPanel startDateChooserJP;
     private JPanel endDateChooserJP;
     private JPanel typeJP;
+    private JButton visszaButton;
 
     Calendar cld = Calendar.getInstance(); //Aktuális dátum
     JDateChooser startDateChooser = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
@@ -77,6 +78,14 @@ public class CreateCalendar extends JDialog{
 
         setVisible(true);
 
+        visszaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                HomePage h = new HomePage(null);
+                h.setVisible(true);
+            }
+        });
     }
 
     private void CreateCalendar()

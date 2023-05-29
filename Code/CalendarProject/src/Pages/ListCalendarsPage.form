@@ -20,11 +20,6 @@
           <text value="Naptáraim"/>
         </properties>
       </component>
-      <hspacer id="cc1e5">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
       <hspacer id="b4f2b">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -37,6 +32,17 @@
           </grid>
         </constraints>
         <properties/>
+      </component>
+      <component id="20af" class="javax.swing.JButton" binding="visszaButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16162149"/>
+          <font name="Consolas" size="13"/>
+          <foreground color="-1118482"/>
+          <text value="Vissza"/>
+        </properties>
       </component>
     </children>
   </grid>
