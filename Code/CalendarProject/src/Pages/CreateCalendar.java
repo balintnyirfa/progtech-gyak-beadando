@@ -151,7 +151,7 @@ public class CreateCalendar extends JDialog{
         }
 
 
-        cal = addCalendarToDatabase(user.getID(), cte, from_date, to_date, title);
+        cal = addCalendarToDatabase(user.getID(), comboBox.getModel().getSelectedItem().toString(), from_date, to_date, title);
 
         if(cal != null){
             JOptionPane.showMessageDialog(this, "Sikeres létrehozás!");
@@ -164,7 +164,7 @@ public class CreateCalendar extends JDialog{
         }
     }
 
-    private CalendarAbstract addCalendarToDatabase(int user_id, CalendarTypeEnum type, Date from_date, Date to_date, String title) {
+    private CalendarAbstract addCalendarToDatabase(int user_id, String type, Date from_date, Date to_date, String title) {
         CalendarAbstract cal = null;
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -173,7 +173,7 @@ public class CreateCalendar extends JDialog{
         try{
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement stm = conn.createStatement();
-            String sql = "INSERT INTO calendar(user_id, type, from_date, to_date, title) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO calendar(user_id, type, from_date, to_date, title) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, user_id);
             preparedStatement.setObject(2, type);
@@ -185,7 +185,7 @@ public class CreateCalendar extends JDialog{
             if(addedRows > 0){
                 cal = new CalendarAbstract(user_id){};
                 cal.setUser_id(user_id);
-                cal.setType(type);
+                cal.setType(CalendarTypeEnum.valueOf(type));
                 cal.setFrom_date(from_date);
                 cal.setTo_date(to_date);
                 cal.setTitle(title);
