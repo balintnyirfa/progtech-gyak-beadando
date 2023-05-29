@@ -2,9 +2,7 @@ package Calendar;
 
 import classes.Event;
 
-import java.util.Calendar;
-
-public class AddEventCommand implements IAddCommand {
+public class AddEventCommand implements ICommand {
     private CalendarAbstract calendar;
     private Event event;
 
@@ -14,7 +12,8 @@ public class AddEventCommand implements IAddCommand {
     }
 
     @Override
-    public void AddEvent() {
+    public void ExecuteEvent() {
         calendar.addEvent(event);
     }
+
 }

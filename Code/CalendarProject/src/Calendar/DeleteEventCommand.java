@@ -4,7 +4,7 @@ import classes.Event;
 
 import java.util.Calendar;
 
-public class DeleteEventCommand  implements IDeleteCommand{
+public class DeleteEventCommand  implements ICommand{
     private CalendarAbstract calendar;
     private Event event;
 
@@ -14,7 +14,7 @@ public class DeleteEventCommand  implements IDeleteCommand{
     }
 
     @Override
-    public void DeleteEvent() {
+    public void ExecuteEvent() {
         calendar.removeEvent(event);
     }
 }
