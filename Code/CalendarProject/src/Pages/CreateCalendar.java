@@ -200,20 +200,4 @@ public class CreateCalendar extends JDialog{
         return cal;
     }
 
-
-    /*private void createUIComponents() {
-        calendarTypeComboBox = new JComboBox<>(CalendarTypeEnum.values());
-        Object sel = calendarTypeComboBox.getSelectedItem();
-        if (sel == "NAPI")
-        {
-            sel = CalendarTypeEnum.NAPI;
-        }
-        else if (sel == "HETI")
-        {
-            sel = CalendarTypeEnum.HETI;
-        }
-        else if (sel == "HAVI") {
-            sel = CalendarTypeEnum.HAVI;
-        }
-    }*/
 }
