@@ -25,7 +25,9 @@ public class HomePage extends JDialog{
         ownCalendarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                ListCalendarsPage list = new ListCalendarsPage(null);
+                list.setVisible(true);
             }
         });
         createNewCalendarButton.addActionListener(new ActionListener() {

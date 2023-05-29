@@ -18,8 +18,6 @@ import java.util.Date;
 public class AddEventPage extends JDialog{
     private JTextField eventTitle;
     private JTextField eventContent;
-    private JTextField eventFromDate;
-    private JTextField eventEndDate;
     private JButton eventAdd;
     private JPanel createEvent;
     private JButton visszaButton;
