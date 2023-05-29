@@ -64,13 +64,11 @@ public class User implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         CalendarAbstract calendar = (CalendarAbstract) o;
-        /*
-        if(arg instanceof addEventCommand){
+        if(arg instanceof AddEventCommand){
 
         }
-        else if(arg instanceof removeEventCommand){
+        else if(arg instanceof DeleteEventCommand) {
 
         }
-         */
     }
 }

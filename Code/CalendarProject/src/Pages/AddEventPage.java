@@ -1,8 +1,9 @@
 package Pages;
 
-import classes.User;
+import classes.AddEventCommand;
 import classes.Event;
 import Calendar.CalendarAbstract;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddEventPage extends JDialog{
     private JTextField eventTitle;
@@ -21,9 +21,15 @@ public class AddEventPage extends JDialog{
     private JButton eventAdd;
     private JPanel createEvent;
     private JButton visszaButton;
+    private JPanel endDate;
+    private JPanel startDate;
 
     //CALENDAR kiválasztástól!
     private CalendarAbstract calendar;
+
+    Calendar cld = Calendar.getInstance(); //Aktuális dátum
+    JDateChooser startDateChooser = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
+    JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
     public AddEventPage(JFrame parent){
         super(parent);
@@ -33,6 +39,8 @@ public class AddEventPage extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        startDate.add(startDateChooser);
+        endDate.add(endDateChooser);
 
         eventAdd.addActionListener(new ActionListener() {
             @Override
@@ -48,16 +56,20 @@ public class AddEventPage extends JDialog{
                 lp.setVisible(true);
             }
         });
-        setVisible(true);
+        //setVisible(true);
     }
 
     private void AddEventToDatabase(){
         Event event = null;
         String title = eventTitle.getText();
         String content = eventContent.getText();
+
+        java.util.Date startDate = startDateChooser.getDate();
+        java.sql.Date from = new java.sql.Date(startDate.getTime());
+
+        java.util.Date endDate = endDateChooser.getDate();
+        java.sql.Date to = new java.sql.Date(endDate.getTime());
         //int calendar.ID;
-        //Date from;
-        //Dare to;
 
         if(title.isEmpty() || content.isEmpty()){
             JOptionPane.showMessageDialog(this, "Az összes mezőt ki kell tölteni!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -75,9 +87,9 @@ public class AddEventPage extends JDialog{
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, content);
-            //preparedStatement.setString(3, calendar_id);
-            //preparedStatement.setString(4, lastname);
-            //preparedStatement.setString(5, password);
+            //preparedStatement.setString(3, cal_id);
+            preparedStatement.setDate(4, from);
+            preparedStatement.setDate(5, to);
 
             int addedRows = preparedStatement.executeUpdate();
             if (addedRows > 0) {
@@ -86,7 +98,8 @@ public class AddEventPage extends JDialog{
                 event.setContent(content);
                 //event.setFrom(from);
                 //event.setTo(to);
-                calendar.addEvent(event);
+                AddEventCommand a = new AddEventCommand(calendar, event);
+                a.ExecuteEvent();
             }
             stm.close();
             conn.close();

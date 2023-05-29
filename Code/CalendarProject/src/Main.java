@@ -1,4 +1,5 @@
 import Pages.AddEventPage;
+import Pages.CalendarPage;
 import Pages.CreateCalendar;
 import Pages.SignInPage;
 
@@ -6,10 +7,11 @@ import Pages.SignInPage;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        SignInPage login = new SignInPage(null);
+        //SignInPage login = new SignInPage(null);
         //CreateCalendar cr = new CreateCalendar(null);
         //HomePage h = new HomePage(null);
         //RegisterPage reg = new RegisterPage(null);
         //AddEventPage a = new AddEventPage(null);
+        CalendarPage c = new CalendarPage(null);
     }
 }
