@@ -1,7 +1,5 @@
 package Pages;
 
-import Pages.CreateCalendar;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +9,7 @@ public class HomePage extends JDialog{
     private JButton ownCalendarButton;
     private JButton createNewCalendarButton;
     private JPanel homePanel;
+    private JButton logoutButton;
 
     public HomePage(JFrame parent){
         super(parent);
@@ -21,6 +20,7 @@ public class HomePage extends JDialog{
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setForeground(Color.white);
+        //welcomeLabel.setText("Üdvözöllek, " + user.getUsername() + "!");      //null-t ad vissza :(
 
         ownCalendarButton.addActionListener(new ActionListener() {
             @Override
@@ -36,6 +36,13 @@ public class HomePage extends JDialog{
                 dispose();
                 CreateCalendar createCalendar = new CreateCalendar(null);
                 createCalendar.setVisible(true);
+            }
+        });
+
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
 
