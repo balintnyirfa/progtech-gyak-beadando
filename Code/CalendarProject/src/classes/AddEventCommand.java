@@ -1,6 +1,8 @@
-package Calendar;
+package classes;
 
+import Calendar.CalendarAbstract;
 import classes.Event;
+import classes.ICommand;
 
 public class AddEventCommand implements ICommand {
     private CalendarAbstract calendar;

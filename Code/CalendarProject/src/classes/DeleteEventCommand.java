@@ -1,10 +1,10 @@
-package Calendar;
+package classes;
 
+import Calendar.CalendarAbstract;
 import classes.Event;
+import classes.ICommand;
 
-import java.util.Calendar;
-
-public class DeleteEventCommand  implements ICommand{
+public class DeleteEventCommand  implements ICommand {
     private CalendarAbstract calendar;
     private Event event;
 
