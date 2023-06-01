@@ -21,15 +21,15 @@ public class AddEventPage extends JDialog{
     private JButton eventAdd;
     private JPanel createEvent;
     private JButton visszaButton;
-    private JPanel endDate;
-    private JPanel startDate;
+    private JPanel startDateJP;
+    private JPanel endDateJP;
 
     //CALENDAR kiválasztástól!
     private CalendarAbstract calendar;
 
     Calendar cld = Calendar.getInstance(); //Aktuális dátum
-    JDateChooser startDateChooser = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
-    JDateChooser endDateChooser = new JDateChooser(cld.getTime());
+    JDateChooser startDateChooser2 = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
+    JDateChooser endDateChooser2 = new JDateChooser(cld.getTime());
 
     public AddEventPage(JFrame parent){
         super(parent);
@@ -39,8 +39,13 @@ public class AddEventPage extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        startDate.add(startDateChooser);
-        endDate.add(endDateChooser);
+        try {
+            startDateJP.add(startDateChooser2);
+            endDateJP.add(endDateChooser2);
+        }
+        catch (Exception exception){
+            System.out.println(exception.getMessage());
+        }
 
         eventAdd.addActionListener(new ActionListener() {
             @Override
@@ -56,7 +61,7 @@ public class AddEventPage extends JDialog{
                 lp.setVisible(true);
             }
         });
-        //setVisible(true);
+        setVisible(true);
     }
 
     private void AddEventToDatabase(){
@@ -64,10 +69,10 @@ public class AddEventPage extends JDialog{
         String title = eventTitle.getText();
         String content = eventContent.getText();
 
-        java.util.Date startDate = startDateChooser.getDate();
+        java.util.Date startDate = startDateChooser2.getDate();
         java.sql.Date from = new java.sql.Date(startDate.getTime());
 
-        java.util.Date endDate = endDateChooser.getDate();
+        java.util.Date endDate = endDateChooser2.getDate();
         java.sql.Date to = new java.sql.Date(endDate.getTime());
         //int calendar.ID;
 
