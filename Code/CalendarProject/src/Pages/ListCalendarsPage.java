@@ -4,6 +4,7 @@ import classes.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +14,8 @@ public class ListCalendarsPage extends JDialog {
     private JPanel ListCalendarsPanel;
     private JTable CalendarsTable;
     private JButton visszaButton;
+    private JButton listItemsBtn;
     private JPanel CalendarsPanel;
-
     private User user;
 
     public ListCalendarsPage(JFrame parent){
@@ -31,33 +32,6 @@ public class ListCalendarsPage extends JDialog {
         final String USERNAME = "root";
         final String PASSWORD = "";
 
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            Statement stm = conn.createStatement();
-            String query = "SELECT * FROM `calendar` WHERE `user_id = ` + user.ID"; //A bejelentkezett user adati kellenenek inkább
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            ResultSet rs = stm.executeQuery(query);
-            ResultSetMetaData rsmd = rs.getMetaData();
-            DefaultTableModel model = (DefaultTableModel) CalendarsTable.getModel();
-
-            int cols = rsmd.getColumnCount();
-            String[] colName = new String[cols];
-            for (int i = 0; i < cols; i++) {
-                colName[i] = rsmd.getColumnName(i+1);
-            }
-            model.setColumnIdentifiers(colName);
-            String title;
-            while (rs.next()) {
-                title = rs.getString(3); //Harmadik oszlopban van a title az adatbázisban
-                //Gombokat kell itt megjeleníteni
-                String[] row = { title };
-                model.addRow(row);
-            }
-            stm.close();
-            conn.close();
-        }catch (Exception e){
-            //JDBCTutorialUtilities.printSQLException(e);
-        }
 
         visszaButton.addActionListener(new ActionListener() {
             @Override
@@ -65,6 +39,41 @@ public class ListCalendarsPage extends JDialog {
                 dispose();
                 HomePage h = new HomePage(null);
                 h.setVisible(true);
+            }
+        });
+
+        listItemsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+                    Statement stm = conn.createStatement();
+                    String query = "SELECT title, type, from_date, to_date FROM `calendar`"; //WHERE `user_id = 4`"; A bejelentkezett user adati kellenenek inkább
+                    //PreparedStatement preparedStatement = conn.prepareStatement(query);
+                    ResultSet rs = stm.executeQuery(query);
+                    ResultSetMetaData rsmd = rs.getMetaData();
+                    DefaultTableModel model = (DefaultTableModel) CalendarsTable.getModel();
+
+                    int cols = rsmd.getColumnCount();
+                    String[] colName = new String[cols];
+                    for (int i = 0; i < cols; i++) {
+                        colName[i] = rsmd.getColumnName(i+1);
+                    }
+                    model.setColumnIdentifiers(colName);
+                    String type, title;
+
+                    while (rs.next()) {
+                        title = rs.getString(1);
+                        type = rs.getString(2);
+
+                        Object[] row = { type, title};
+                        model.addRow(row);
+                    }
+                    stm.close();
+                    conn.close();
+                }catch (Exception exception){
+                    //JDBCTutorialUtilities.printSQLException(e);
+                }
             }
         });
 

@@ -113,7 +113,6 @@ public class SignInPage extends JDialog{
         HomePage homePage = new HomePage(null);
         homePage.setVisible(true);
         return user;
-
     }
 
     public static void main(String[] args) {
