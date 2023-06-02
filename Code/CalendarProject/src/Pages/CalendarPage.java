@@ -1,13 +1,21 @@
 package Pages;
 
+import classes.Event;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class CalendarPage extends  JDialog {
     private JButton addEvent;
     private JPanel calendarPage;
+    private JTable eventsTable;
 
     public CalendarPage(JFrame parent){
         super(parent);
@@ -17,6 +25,8 @@ public class CalendarPage extends  JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        ListEvents(1);
         addEvent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -27,5 +37,44 @@ public class CalendarPage extends  JDialog {
         });
 
         setVisible(true);
+    }
+
+    private void ListEvents(int calanderId){
+        final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
+        final String USERNAME = "root";
+        final String PASSWORD = "";
+        int calendarId = calanderId;
+
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT * FROM event WHERE calendar_id = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, calendarId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) eventsTable.getModel();
+            int cols = rsmd.getColumnCount();
+            String[] colName = new String[cols];
+            for (int i = 0; i < cols; i++) {
+                colName[i] = rsmd.getColumnName(i+1);
+            }
+            model.setColumnIdentifiers(colName);
+            String title, content;
+
+            while (rs.next()) {
+                title = rs.getString("title");
+                content = rs.getString("content");
+                Object[] row = {title, content};
+                model.addRow(row);
+            }
+
+            stmt.close();
+            conn.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

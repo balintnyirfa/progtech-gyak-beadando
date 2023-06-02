@@ -8,7 +8,7 @@ public class Main {
         //CreateCalendar cr = new CreateCalendar(null);
         //HomePage h = new HomePage(null);
         //RegisterPage reg = new RegisterPage(null);
-        //CalendarPage c = new CalendarPage(null);
-        AddEventPage a = new AddEventPage(null);
+        CalendarPage c = new CalendarPage(null);
+        //AddEventPage a = new AddEventPage(null);
     }
 }
