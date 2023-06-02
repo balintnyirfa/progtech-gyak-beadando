@@ -9,7 +9,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/jcalendar-1.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/mysql-connector-j-8.0.33.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -18,11 +18,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/mysql-connector-j-8.0.33.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/jcalendar-1.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jdatepicker" level="project" />
   </component>
 </module>
