@@ -48,8 +48,9 @@ public class ListCalendarsPage extends JDialog {
                 try {
                     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
                     Statement stm = conn.createStatement();
-                    String query = "SELECT title, type, from_date, to_date FROM `calendar`"; //WHERE `user_id = 4`"; A bejelentkezett user adati kellenenek inkább
+                    String query = "SELECT title, type FROM `calendar` WHERE user_id = 4"; //A bejelentkezett user adati kellenenek inkább
                     //PreparedStatement preparedStatement = conn.prepareStatement(query);
+                    //preparedStatement.setInt(1, id);
                     ResultSet rs = stm.executeQuery(query);
                     ResultSetMetaData rsmd = rs.getMetaData();
                     DefaultTableModel model = (DefaultTableModel) CalendarsTable.getModel();
@@ -63,8 +64,8 @@ public class ListCalendarsPage extends JDialog {
                     String type, title;
 
                     while (rs.next()) {
-                        title = rs.getString(1);
-                        type = rs.getString(2);
+                        title = rs.getString(2);
+                        type = rs.getString(1);
 
                         Object[] row = { type, title};
                         model.addRow(row);
