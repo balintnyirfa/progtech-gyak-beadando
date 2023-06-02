@@ -66,6 +66,8 @@ public abstract class CalendarAbstract extends Observable {
         this.to_date = to_date;
     }
 
+    public abstract CalendarAbstract addCalendarToDatabase(int user_id, String type, java.sql.Date from_date, java.sql.Date to_date, String title);
+
     List<Observer> observerList = new ArrayList<>();
     List<Event> eventList = new ArrayList<>();
 

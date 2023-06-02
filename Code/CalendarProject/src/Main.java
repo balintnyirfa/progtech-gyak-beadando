@@ -1,7 +1,4 @@
-import Pages.AddEventPage;
-import Pages.CalendarPage;
-import Pages.CreateCalendar;
-import Pages.SignInPage;
+import Pages.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -11,7 +8,8 @@ public class Main {
         //CreateCalendar cr = new CreateCalendar(null);
         //HomePage h = new HomePage(null);
         //RegisterPage reg = new RegisterPage(null);
-        //AddEventPage a = new AddEventPage(null);
         CalendarPage c = new CalendarPage(null);
+        //AddEventPage a = new AddEventPage(null);
+        //ListCalendarsPage l = new ListCalendarsPage(null);
     }
 }

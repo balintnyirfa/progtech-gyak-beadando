@@ -21,7 +21,6 @@ public class HomePage extends JDialog{
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setForeground(Color.white);
-        //welcomeLabel.setText("Üdvözöllek, " + user.getUsername() + "!");      //null-t ad vissza :(
 
         ownCalendarButton.addActionListener(new ActionListener() {
             @Override

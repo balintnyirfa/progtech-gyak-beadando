@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 //import org.jdatepicker.JDatePicker;
 import classes.User;
-import com.mysql.cj.Session;
-import com.mysql.cj.xdevapi.SessionFactory;
-import com.mysql.cj.xdevapi.SessionImpl;
 import com.toedter.calendar.JDateChooser;
 //import org.jdatepicker.impl.JDatePanelImpl;
 //import org.jdatepicker.impl.JDatePickerImpl;
@@ -27,15 +24,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 import java.util.Calendar;
-//import java.util.Date;
 import java.sql.Date;
-import java.util.Objects;
-
-import static Calendar.CalendarTypeEnum.*;
 import static Pages.SignInPage.user;
 
 public class CreateCalendar extends JDialog{
@@ -56,7 +46,6 @@ public class CreateCalendar extends JDialog{
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
 
-    public CalendarAbstract cal;
 
     public CreateCalendar(JFrame parent) {
         super(parent);
@@ -92,25 +81,8 @@ public class CreateCalendar extends JDialog{
     {
         // Naptár létrehozása
 
-        CalendarTypeEnum cte = null;
-        if (comboBox.getModel().getSelectedItem() == "NAPI")
-        {
-            cte = NAPI;
-        }
-        else if (comboBox.getModel().getSelectedItem() == "HETI")
-        {
-            cte = HETI;
-        }
-        else if (comboBox.getModel().getSelectedItem() == "HAVI")
-        {
-            cte = HAVI;
-        }
-
         java.util.Date startDate = startDateChooser.getDate();
         java.sql.Date from_date = new java.sql.Date(startDate.getTime());
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //String fromDateStr = dateFormat.format(startDate);
-        //Date from_date = Date.valueOf(fromDateStr);
 
         java.util.Date endDate = endDateChooser.getDate();
         java.sql.Date to_date = new java.sql.Date(endDate.getTime());
@@ -134,16 +106,43 @@ public class CreateCalendar extends JDialog{
         {
             CalendarFactory dailyCalendarFactory = new DailyCalendarFactory();
             CalendarAbstract dailyCalendar = dailyCalendarFactory.createCalendar(user.getID());
+            dailyCalendar.addCalendarToDatabase(
+                    user.getID(),
+                    comboBox.getModel().getSelectedItem().toString(),
+                    from_date,
+                    to_date,
+                    title
+            );
+            createSuccessOrFail(dailyCalendar);
+
         }
         else if (comboBox.getModel().getSelectedItem() == "HETI" && daysBetween == 7)
         {
             CalendarFactory weeklyCalendarFactory = new WeeklyCalendarFactory();
             CalendarAbstract weeklyCalendar = weeklyCalendarFactory.createCalendar(user.getID());
+            weeklyCalendar.addCalendarToDatabase(
+                    user.getID(),
+                    comboBox.getModel().getSelectedItem().toString(),
+                    from_date,
+                    to_date,
+                    title
+            );
+            createSuccessOrFail(weeklyCalendar);
+
         }
         else if (comboBox.getModel().getSelectedItem() == "HAVI" && (daysBetween == 30 || daysBetween == 31))
         {
             CalendarFactory monthlyCalendarFactory = new MonthlyCalendarFactory();
             CalendarAbstract monthlyCalendar = monthlyCalendarFactory.createCalendar(user.getID());
+            monthlyCalendar.addCalendarToDatabase(
+                    user.getID(),
+                    comboBox.getModel().getSelectedItem().toString(),
+                    from_date,
+                    to_date,
+                    title
+            );
+            createSuccessOrFail(monthlyCalendar);
+
         }
         else {
             JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
@@ -151,20 +150,23 @@ public class CreateCalendar extends JDialog{
         }
 
 
-        cal = addCalendarToDatabase(user.getID(), comboBox.getModel().getSelectedItem().toString(), from_date, to_date, title);
+        //cal = addCalendarToDatabase(user.getID(), comboBox.getModel().getSelectedItem().toString(), from_date, to_date, title);
 
-        if(cal != null){
+    }
+
+    private void createSuccessOrFail(CalendarAbstract calendar)
+    {
+        if (calendar != null) {
             JOptionPane.showMessageDialog(this, "Sikeres létrehozás!");
             HomePage home = new HomePage(null);
             home.setVisible(true);
             dispose();
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(this, "Sikertelen létrehozás!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private CalendarAbstract addCalendarToDatabase(int user_id, String type, Date from_date, Date to_date, String title) {
+    /*private CalendarAbstract addCalendarToDatabase(int user_id, String type, Date from_date, Date to_date, String title) {
         CalendarAbstract cal = null;
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -198,6 +200,6 @@ public class CreateCalendar extends JDialog{
         }
 
         return cal;
-    }
+    }*/
 
 }
