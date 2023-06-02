@@ -10,5 +10,6 @@ public class Main {
         //RegisterPage reg = new RegisterPage(null);
         CalendarPage c = new CalendarPage(null);
         //AddEventPage a = new AddEventPage(null);
+        //ListCalendarsPage l = new ListCalendarsPage(null);
     }
 }
