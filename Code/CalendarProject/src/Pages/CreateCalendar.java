@@ -26,8 +26,6 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.sql.Date;
-
-import static Calendar.CalendarTypeEnum.*;
 import static Pages.SignInPage.user;
 
 public class CreateCalendar extends JDialog{
@@ -48,7 +46,6 @@ public class CreateCalendar extends JDialog{
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
 
-    public CalendarAbstract cal;
 
     public CreateCalendar(JFrame parent) {
         super(parent);
@@ -84,25 +81,8 @@ public class CreateCalendar extends JDialog{
     {
         // Naptár létrehozása
 
-        CalendarTypeEnum cte = null;
-        if (comboBox.getModel().getSelectedItem() == "NAPI")
-        {
-            cte = NAPI;
-        }
-        else if (comboBox.getModel().getSelectedItem() == "HETI")
-        {
-            cte = HETI;
-        }
-        else if (comboBox.getModel().getSelectedItem() == "HAVI")
-        {
-            cte = HAVI;
-        }
-
         java.util.Date startDate = startDateChooser.getDate();
         java.sql.Date from_date = new java.sql.Date(startDate.getTime());
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //String fromDateStr = dateFormat.format(startDate);
-        //Date from_date = Date.valueOf(fromDateStr);
 
         java.util.Date endDate = endDateChooser.getDate();
         java.sql.Date to_date = new java.sql.Date(endDate.getTime());
