@@ -126,16 +126,43 @@ public class CreateCalendar extends JDialog{
         {
             CalendarFactory dailyCalendarFactory = new DailyCalendarFactory();
             CalendarAbstract dailyCalendar = dailyCalendarFactory.createCalendar(user.getID());
+            dailyCalendar.addCalendarToDatabase(
+                    user.getID(),
+                    comboBox.getModel().getSelectedItem().toString(),
+                    from_date,
+                    to_date,
+                    title
+            );
+            createSuccessOrFail(dailyCalendar);
+
         }
         else if (comboBox.getModel().getSelectedItem() == "HETI" && daysBetween == 7)
         {
             CalendarFactory weeklyCalendarFactory = new WeeklyCalendarFactory();
             CalendarAbstract weeklyCalendar = weeklyCalendarFactory.createCalendar(user.getID());
+            weeklyCalendar.addCalendarToDatabase(
+                    user.getID(),
+                    comboBox.getModel().getSelectedItem().toString(),
+                    from_date,
+                    to_date,
+                    title
+            );
+            createSuccessOrFail(weeklyCalendar);
+
         }
         else if (comboBox.getModel().getSelectedItem() == "HAVI" && (daysBetween == 30 || daysBetween == 31))
         {
             CalendarFactory monthlyCalendarFactory = new MonthlyCalendarFactory();
             CalendarAbstract monthlyCalendar = monthlyCalendarFactory.createCalendar(user.getID());
+            monthlyCalendar.addCalendarToDatabase(
+                    user.getID(),
+                    comboBox.getModel().getSelectedItem().toString(),
+                    from_date,
+                    to_date,
+                    title
+            );
+            createSuccessOrFail(monthlyCalendar);
+
         }
         else {
             JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
@@ -143,20 +170,23 @@ public class CreateCalendar extends JDialog{
         }
 
 
-        cal = addCalendarToDatabase(user.getID(), comboBox.getModel().getSelectedItem().toString(), from_date, to_date, title);
+        //cal = addCalendarToDatabase(user.getID(), comboBox.getModel().getSelectedItem().toString(), from_date, to_date, title);
 
-        if(cal != null){
+    }
+
+    private void createSuccessOrFail(CalendarAbstract calendar)
+    {
+        if (calendar != null) {
             JOptionPane.showMessageDialog(this, "Sikeres létrehozás!");
             HomePage home = new HomePage(null);
             home.setVisible(true);
             dispose();
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(this, "Sikertelen létrehozás!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private CalendarAbstract addCalendarToDatabase(int user_id, String type, Date from_date, Date to_date, String title) {
+    /*private CalendarAbstract addCalendarToDatabase(int user_id, String type, Date from_date, Date to_date, String title) {
         CalendarAbstract cal = null;
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -190,6 +220,6 @@ public class CreateCalendar extends JDialog{
         }
 
         return cal;
-    }
+    }*/
 
 }
