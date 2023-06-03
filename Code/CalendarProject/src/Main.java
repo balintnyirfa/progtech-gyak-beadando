@@ -6,9 +6,9 @@ public class Main {
     public static void main(String[] args) {
         //SignInPage login = new SignInPage(null);
         //CreateCalendar cr = new CreateCalendar(null);
-        HomePage h = new HomePage(null);
+        //HomePage h = new HomePage(null);
         //RegisterPage reg = new RegisterPage(null);
-        //CalendarPage c = new CalendarPage(null);
+        CalendarPage c = new CalendarPage(null);
         //AddEventPage a = new AddEventPage(null);
         //ListCalendarsPage l = new ListCalendarsPage(null);
     }

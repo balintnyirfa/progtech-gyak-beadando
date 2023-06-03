@@ -146,10 +146,10 @@ public class ListCalendarsPage extends JDialog {
                     String type, title;
 
                     while (rs.next()) {
-                        //title = rs.getString(2);
-                        type = rs.getString(1);
+                        title = rs.getString("title");
+                        type = rs.getString("type");
 
-                        Object[] row = { type};
+                        Object[] row = {title,type};
                         model.addRow(row);
                     }
                     stm.close();

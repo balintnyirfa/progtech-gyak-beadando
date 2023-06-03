@@ -56,18 +56,21 @@ public class CalendarPage extends  JDialog {
             ResultSet rs = preparedStatement.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             DefaultTableModel model = (DefaultTableModel) eventsTable.getModel();
-            int cols = rsmd.getColumnCount();
+            int cols = rsmd.getColumnCount()-2;
             String[] colName = new String[cols];
             for (int i = 0; i < cols; i++) {
                 colName[i] = rsmd.getColumnName(i+1);
             }
             model.setColumnIdentifiers(colName);
             String title, content;
+            Date from, to;
 
             while (rs.next()) {
                 title = rs.getString("title");
                 content = rs.getString("content");
-                Object[] row = {title, content};
+                from = rs.getDate("from_date");
+                to = rs.getDate("to_date");
+                Object[] row = {title, content, from, to};
                 model.addRow(row);
             }
 
