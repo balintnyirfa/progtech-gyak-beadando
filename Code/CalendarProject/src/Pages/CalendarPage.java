@@ -1,5 +1,6 @@
 package Pages;
 
+import Calendar.CalendarAbstract;
 import classes.Event;
 
 import javax.swing.*;
@@ -16,8 +17,9 @@ public class CalendarPage extends  JDialog {
     private JButton addEvent;
     private JPanel calendarPage;
     private JTable eventsTable;
+    private CalendarAbstract calendarAbstract;
 
-    public CalendarPage(JFrame parent, int CalendarID){
+    public CalendarPage(JFrame parent, CalendarAbstract calendar){
         super(parent);
         setTitle("Új esemény létrehozása");
         setContentPane(calendarPage);
@@ -25,13 +27,14 @@ public class CalendarPage extends  JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        calendarAbstract = calendar;
 
-        ListEvents(CalendarID);
+        ListEvents(calendarAbstract.getID());
         addEvent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                AddEventPage addEventPage = new AddEventPage(null, CalendarID);
+                AddEventPage addEventPage = new AddEventPage(null, calendarAbstract);
                 addEventPage.setVisible(true);
             }
         });

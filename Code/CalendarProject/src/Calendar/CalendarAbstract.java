@@ -71,16 +71,16 @@ public abstract class CalendarAbstract extends Observable {
     List<Observer> observerList = new ArrayList<>();
     List<Event> eventList = new ArrayList<>();
 
-    //Ezt a kettőt teszzük majd command-ba!
     public void addEvent(Event event){
         eventList.add(event);
-        setChanged();
-        notifyObservers();
+        System.out.println("Új esemény hozzáadva");
+        //setChanged();
+        //notifyObservers();
     }
     public void removeEvent(Event event){
         eventList.remove(event);
-        setChanged();
-        notifyObservers();
+        //setChanged();
+        //notifyObservers();
     }
 
     //public abstract Calendar createCalendar();    ---> CalendarFactoryben lesz

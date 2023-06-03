@@ -26,12 +26,12 @@ public class AddEventPage extends JDialog{
     private JPanel endDateJP;
 
     //CALENDAR kiválasztástól!
-    int calendarID;
+    CalendarAbstract calendarAbstract;
     Calendar cld = Calendar.getInstance();
     JDateChooser startDateChooser = new JDateChooser(cld.getTime());
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
-    public AddEventPage(JFrame parent, int CalendarID){
+    public AddEventPage(JFrame parent, CalendarAbstract calendar){
         super(parent);
         setTitle("Új esemény létrehozása");
         setContentPane(createEvent);
@@ -41,7 +41,7 @@ public class AddEventPage extends JDialog{
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         startDateJP.add(startDateChooser);
         endDateJP.add(endDateChooser);
-        calendarID = CalendarID;
+        calendarAbstract = calendar;
 
         eventAdd.addActionListener(new ActionListener() {
             @Override
@@ -86,7 +86,7 @@ public class AddEventPage extends JDialog{
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, content);
-            preparedStatement.setInt(3, calendarID);
+            preparedStatement.setInt(3, calendarAbstract.getID());
             preparedStatement.setDate(4, from);
             preparedStatement.setDate(5, to);
 
@@ -97,8 +97,8 @@ public class AddEventPage extends JDialog{
                 event.setContent(content);
                 event.setFrom(from);
                 event.setTo(to);
-                //AddEventCommand a = new AddEventCommand(calendar, event);
-                //a.ExecuteEvent();
+                AddEventCommand a = new AddEventCommand(calendarAbstract, event);
+                a.ExecuteEvent();
             }
             stm.close();
             conn.close();
