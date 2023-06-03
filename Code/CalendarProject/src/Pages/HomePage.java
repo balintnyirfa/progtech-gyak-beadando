@@ -10,7 +10,6 @@ public class HomePage extends JDialog{
     private JButton createNewCalendarButton;
     private JPanel homePanel;
     private JButton logoutButton;
-    private JButton addEventOpen;
 
     public HomePage(JFrame parent){
         super(parent);
@@ -28,15 +27,6 @@ public class HomePage extends JDialog{
                 dispose();
                 ListCalendarsPage list = new ListCalendarsPage(null);
                 list.setVisible(true);
-            }
-        });
-
-        addEventOpen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                AddEventPage addEventPage = new AddEventPage(null);
-                addEventPage.setVisible(true);
             }
         });
 
