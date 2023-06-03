@@ -73,8 +73,6 @@ public class CreateCalendar extends JDialog{
                 h.setVisible(true);
             }
         });
-
-        setVisible(true);
     }
 
     private void CreateACalendar()

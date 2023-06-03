@@ -57,7 +57,6 @@ public class AddEventPage extends JDialog{
                 lp.setVisible(true);
             }
         });
-        setVisible(true);
     }
 
     private void AddEventToDatabase(){

@@ -38,7 +38,6 @@ public class ListCalendarsPage extends JDialog {
                 h.setVisible(true);
             }
         });
-        setVisible(true);
     }
     private void ListCalendars(){
 

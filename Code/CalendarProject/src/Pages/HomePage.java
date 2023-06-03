@@ -45,7 +45,5 @@ public class HomePage extends JDialog{
                 dispose();
             }
         });
-
-        setVisible(true);
     }
 }

@@ -43,8 +43,6 @@ public class RegisterPage extends JDialog{
                 signInPage.setVisible(true);
             }
         });
-
-        setVisible(true);
     }
     private void registerUser(){
         String Email = emailText.getText();

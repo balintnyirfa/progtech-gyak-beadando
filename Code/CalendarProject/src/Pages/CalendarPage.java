@@ -35,8 +35,6 @@ public class CalendarPage extends  JDialog {
                 addEventPage.setVisible(true);
             }
         });
-
-        setVisible(true);
     }
 
     private void ListEvents(int calanderId){
