@@ -26,13 +26,12 @@ public class AddEventPage extends JDialog{
     private JPanel endDateJP;
 
     //CALENDAR kiválasztástól!
-    private CalendarAbstract calendar;
-
+    int calendarID;
     Calendar cld = Calendar.getInstance();
     JDateChooser startDateChooser = new JDateChooser(cld.getTime());
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
-    public AddEventPage(JFrame parent){
+    public AddEventPage(JFrame parent, int CalendarID){
         super(parent);
         setTitle("Új esemény létrehozása");
         setContentPane(createEvent);
@@ -42,6 +41,7 @@ public class AddEventPage extends JDialog{
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         startDateJP.add(startDateChooser);
         endDateJP.add(endDateChooser);
+        calendarID = CalendarID;
 
         eventAdd.addActionListener(new ActionListener() {
             @Override
@@ -70,8 +70,6 @@ public class AddEventPage extends JDialog{
 
         java.util.Date endDate = endDateChooser.getDate();
         java.sql.Date to = new java.sql.Date(endDate.getTime());
-        //int calendar.ID;
-        int id = 1;
 
         if(title.isEmpty() || content.isEmpty()){
             JOptionPane.showMessageDialog(this, "Az összes mezőt ki kell tölteni!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -89,7 +87,7 @@ public class AddEventPage extends JDialog{
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, content);
-            preparedStatement.setInt(3, id);
+            preparedStatement.setInt(3, calendarID);
             preparedStatement.setDate(4, from);
             preparedStatement.setDate(5, to);
 

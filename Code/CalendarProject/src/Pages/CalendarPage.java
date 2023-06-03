@@ -17,7 +17,7 @@ public class CalendarPage extends  JDialog {
     private JPanel calendarPage;
     private JTable eventsTable;
 
-    public CalendarPage(JFrame parent){
+    public CalendarPage(JFrame parent, int CalendarID){
         super(parent);
         setTitle("Új esemény létrehozása");
         setContentPane(calendarPage);
@@ -26,12 +26,12 @@ public class CalendarPage extends  JDialog {
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        ListEvents(1);
+        ListEvents(CalendarID);
         addEvent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                AddEventPage addEventPage = new AddEventPage(null);
+                AddEventPage addEventPage = new AddEventPage(null, CalendarID);
                 addEventPage.setVisible(true);
             }
         });

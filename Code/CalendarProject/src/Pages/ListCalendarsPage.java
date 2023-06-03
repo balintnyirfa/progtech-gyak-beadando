@@ -1,14 +1,15 @@
 package Pages;
 
-import classes.User;
+import classes.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /*class ButtonRenderer extends JButton implements TableCellRenderer {
 
@@ -90,10 +91,11 @@ public class ListCalendarsPage extends JDialog {
     private JTable CalendarsTable;
     private JButton visszaButton;
     private JButton listItemsBtn;
+    private JButton selectedCalendarButton;
     private JPanel CalendarsPanel;
     private User user;
 
-    public ListCalendarsPage(JFrame parent){
+    public ListCalendarsPage(JFrame parent) {
         super(parent);
         setTitle("Naptáraim");
         setContentPane(ListCalendarsPanel);
@@ -127,34 +129,46 @@ public class ListCalendarsPage extends JDialog {
                 try {
                     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
                     Statement stm = conn.createStatement();
-                    String query = "SELECT title, type FROM `calendar` WHERE user_id = 4"; //A bejelentkezett user adati kellenenek inkább
-                    //PreparedStatement preparedStatement = conn.prepareStatement(query);
+                    String query = "SELECT title, type, ID FROM `calendar` WHERE user_id = 4"; //A bejelentkezett user adati kellenenek inkább
+                    PreparedStatement preparedStatement = conn.prepareStatement(query);
                     //preparedStatement.setInt(1, id);
-                    ResultSet rs = stm.executeQuery(query);
+                    ResultSet rs = preparedStatement.executeQuery();
                     ResultSetMetaData rsmd = rs.getMetaData();
                     DefaultTableModel model = (DefaultTableModel) CalendarsTable.getModel();
 
-
-
-
-                    int cols = rsmd.getColumnCount();
+                    int cols = rsmd.getColumnCount() - 1;
                     String[] colName = new String[cols];
                     for (int i = 0; i < cols; i++) {
-                        colName[i] = rsmd.getColumnName(i+1);
+                        colName[i] = rsmd.getColumnName(i + 1);
                     }
                     model.setColumnIdentifiers(colName);
                     String type, title;
+                    List<Integer> calendarIds = new ArrayList<>();
 
                     while (rs.next()) {
                         title = rs.getString("title");
                         type = rs.getString("type");
+                        calendarIds.add(rs.getInt("ID"));
 
-                        Object[] row = {title,type};
+                        Object[] row = {title, type};
                         model.addRow(row);
                     }
                     stm.close();
                     conn.close();
-                }catch (Exception exception){
+
+                    RowListener rl = new RowListener();
+                    CalendarsTable.addMouseListener(new TableRowClickListener(CalendarsTable, rl));
+                    selectedCalendarButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            int row = rl.GetSelectedRow();
+                            dispose();
+                            CalendarPage calendarPage = new CalendarPage(null, calendarIds.get(row));
+                            calendarPage.setVisible(true);
+                        }
+                    });
+
+                } catch (Exception exception) {
                     //JDBCTutorialUtilities.printSQLException(e);
                 }
             }
