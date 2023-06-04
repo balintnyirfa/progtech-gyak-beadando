@@ -18,15 +18,15 @@ import java.util.Calendar;
 public class AddEventPage extends JDialog{
 
     private JPanel createEvent;
-    private JTextField eventTitle;
-    private JTextField eventContent;
+    public JTextField eventTitle;
+    public JTextField eventContent;
     private JButton eventAdd;
     private JButton backButton;
-    private JPanel startDateJP;
-    private JPanel endDateJP;
+    public JPanel startDateJP;
+    public JPanel endDateJP;
 
     //CALENDAR kiválasztástól!
-    CalendarAbstract calendarAbstract;
+    public CalendarAbstract calendarAbstract;
     Calendar cld = Calendar.getInstance();
     JDateChooser startDateChooser = new JDateChooser(cld.getTime());
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
@@ -64,7 +64,7 @@ public class AddEventPage extends JDialog{
         });
     }
 
-    private void AddEventToDatabase(){
+    public void AddEventToDatabase(){
         Event event = null;
         String title = eventTitle.getText();
         String content = eventContent.getText();
