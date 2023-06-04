@@ -5,8 +5,24 @@ import classes.Event;
 import classes.ICommand;
 
 public class AddEventCommand implements ICommand {
+    public CalendarAbstract getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(CalendarAbstract calendar) {
+        this.calendar = calendar;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
     private CalendarAbstract calendar;
-    public Event event;
+    private Event event;
 
     public AddEventCommand(CalendarAbstract calendar, Event event) {
         this.calendar = calendar;

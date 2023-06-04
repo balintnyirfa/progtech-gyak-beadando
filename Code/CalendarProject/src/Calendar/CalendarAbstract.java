@@ -4,6 +4,7 @@ import classes.AddEventCommand;
 import classes.Event;
 
 import java.util.*;
+import java.util.Observable;
 
 public abstract class CalendarAbstract extends Observable {
 
@@ -69,7 +70,6 @@ public abstract class CalendarAbstract extends Observable {
 
     public abstract CalendarAbstract addCalendarToDatabase(int user_id, String type, java.sql.Date from_date, java.sql.Date to_date, String title);
 
-    //List<Observer> observersList = new ArrayList<>();
     List<Event> eventList = new ArrayList<>();
 
     public void addEvent(Event event){
@@ -83,6 +83,5 @@ public abstract class CalendarAbstract extends Observable {
         //notifyObservers();
     }
 
-    //public abstract Calendar createCalendar();    ---> CalendarFactoryben lesz
 
 }

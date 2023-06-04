@@ -18,7 +18,7 @@ public class ListCalendarsPage extends JDialog {
     private JButton visszaButton;
     private JButton selectedCalendarButton;
     private JPanel CalendarsPanel;
-    private int userId;
+    private User user;
 
     public ListCalendarsPage(JFrame parent) {
         super(parent);
@@ -29,7 +29,6 @@ public class ListCalendarsPage extends JDialog {
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setForeground(Color.white);
-        userId = SignInPage.user.getID();
         ListCalendars();
 
         visszaButton.addActionListener(new ActionListener() {
@@ -47,13 +46,18 @@ public class ListCalendarsPage extends JDialog {
         final String USERNAME = "root";
         final String PASSWORD = "";
 
+        user = new User();
+        user.setID(SignInPage.user.getID());
+        user.setEmail(SignInPage.user.getEmail());
+        user.setUsername(SignInPage.user.getUsername());
+
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement stm = conn.createStatement();
             String query = "SELECT title, type, ID FROM `calendar` WHERE user_id = ?"; //A bejelentkezett user adati kellenenek inkább
 
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(1, user.getID());
 
             ResultSet rs = preparedStatement.executeQuery();
             DefaultTableModel model = (DefaultTableModel) CalendarsTable.getModel();
@@ -71,19 +75,19 @@ public class ListCalendarsPage extends JDialog {
                 id = rs.getInt("ID");
 
                 if(CalendarTypeEnum.valueOf(type) == CalendarTypeEnum.NAPI){
-                    DailyCalendar d = new DailyCalendar(userId);
+                    DailyCalendar d = new DailyCalendar(user.getID());
                     d.setID(id);
                     d.setTitle(title);
                     calendars.add(d);
                 }
                 else if(CalendarTypeEnum.valueOf(type) == CalendarTypeEnum.HETI){
-                    WeeklyCalendar w = new WeeklyCalendar(userId);
+                    WeeklyCalendar w = new WeeklyCalendar(user.getID());
                     w.setID(id);
                     w.setTitle(title);
                     calendars.add(w);
                 }
                 else{
-                    MonthlyCalendar m = new MonthlyCalendar(userId);
+                    MonthlyCalendar m = new MonthlyCalendar(user.getID());
                     m.setID(id);
                     m.setTitle(title);
                     calendars.add(m);
@@ -102,6 +106,7 @@ public class ListCalendarsPage extends JDialog {
                 public void actionPerformed(ActionEvent e) {
                     int row = rl.GetSelectedRow();
                     try {
+                        calendars.get(row).addObserver(user);
                         CalendarPage calendarPage = new CalendarPage(null, calendars.get(row));
                         dispose();
                         calendarPage.setVisible(true);

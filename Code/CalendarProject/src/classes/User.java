@@ -2,7 +2,7 @@ package classes;
 
 import Calendar.CalendarAbstract;
 
-import java.util.AbstractCollection;
+import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -62,7 +62,7 @@ public class User implements Observer {
         Password = password;
     }
 
-    @Override
+
     public void update(Observable o, Object arg) {
         CalendarAbstract calendar = (CalendarAbstract) o;
         if(arg instanceof AddEventCommand){
@@ -75,6 +75,7 @@ public class User implements Observer {
     }
 
     private void actionWhenAddEvent(CalendarAbstract calendarAbstract, AddEventCommand addEventCommand) {
-        System.out.printf(calendarAbstract.getTitle() + " című naptárba " + addEventCommand.event.getTitle() + " nevű eseményt töltöttek fel");
+        JOptionPane.showMessageDialog(null, addEventCommand.getCalendar().getTitle() + " nevű naptárba "+ addEventCommand.getEvent().getTitle() + " nevű eseményt töltöttél fel!", "For Observer", JOptionPane.PLAIN_MESSAGE);
     }
+
 }

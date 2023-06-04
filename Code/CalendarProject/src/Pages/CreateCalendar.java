@@ -45,7 +45,7 @@ public class CreateCalendar extends JDialog{
     JDateChooser startDateChooser = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
-
+    private User user;
 
     public CreateCalendar(JFrame parent) {
         super(parent);
@@ -104,7 +104,6 @@ public class CreateCalendar extends JDialog{
         {
             CalendarFactory dailyCalendarFactory = new DailyCalendarFactory();
             CalendarAbstract dailyCalendar = dailyCalendarFactory.createCalendar(user.getID());
-            dailyCalendar.addObserver(user);
             dailyCalendar.addCalendarToDatabase(
                     user.getID(),
                     comboBox.getModel().getSelectedItem().toString(),
@@ -113,13 +112,12 @@ public class CreateCalendar extends JDialog{
                     title
             );
             createSuccessOrFail(dailyCalendar);
-
+            dailyCalendar.addObserver(user);
         }
         else if (comboBox.getModel().getSelectedItem() == "HETI" && daysBetween == 7)
         {
             CalendarFactory weeklyCalendarFactory = new WeeklyCalendarFactory();
             CalendarAbstract weeklyCalendar = weeklyCalendarFactory.createCalendar(user.getID());
-            weeklyCalendar.addObserver(user);
             weeklyCalendar.addCalendarToDatabase(
                     user.getID(),
                     comboBox.getModel().getSelectedItem().toString(),
@@ -128,12 +126,12 @@ public class CreateCalendar extends JDialog{
                     title
             );
             createSuccessOrFail(weeklyCalendar);
+            weeklyCalendar.addObserver(user);
         }
         else if (comboBox.getModel().getSelectedItem() == "HAVI" && (daysBetween == 30 || daysBetween == 31))
         {
             CalendarFactory monthlyCalendarFactory = new MonthlyCalendarFactory();
             CalendarAbstract monthlyCalendar = monthlyCalendarFactory.createCalendar(user.getID());
-            monthlyCalendar.addObserver(user);
             monthlyCalendar.addCalendarToDatabase(
                     user.getID(),
                     comboBox.getModel().getSelectedItem().toString(),
@@ -142,7 +140,7 @@ public class CreateCalendar extends JDialog{
                     title
             );
             createSuccessOrFail(monthlyCalendar);
-
+            monthlyCalendar.addObserver(user);
         }
         else {
             JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
@@ -157,9 +155,10 @@ public class CreateCalendar extends JDialog{
     {
         if (calendar != null) {
             JOptionPane.showMessageDialog(this, "Sikeres létrehozás!");
+
+            dispose();
             HomePage home = new HomePage(null);
             home.setVisible(true);
-            dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Sikertelen létrehozás!", "Error", JOptionPane.ERROR_MESSAGE);
         }
