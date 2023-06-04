@@ -78,6 +78,10 @@ public class CreateCalendar extends JDialog{
     private void CreateACalendar()
     {
         // Naptár létrehozása
+        user = new User();
+        user.setID(SignInPage.user.getID());
+        user.setEmail(SignInPage.user.getEmail());
+        user.setUsername(SignInPage.user.getUsername());
 
         java.util.Date startDate = startDateChooser.getDate();
         java.sql.Date from_date = new java.sql.Date(startDate.getTime());

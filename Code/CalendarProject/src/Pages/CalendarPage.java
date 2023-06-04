@@ -20,9 +20,9 @@ public class CalendarPage extends  JDialog {
 
     public CalendarPage(JFrame parent, CalendarAbstract calendar){
         super(parent);
-        setTitle("Új esemény létrehozása");
+        setTitle("Naptár eseményei");
         setContentPane(calendarPage);
-        setMinimumSize(new Dimension(450, 500));
+        setMinimumSize(new Dimension(800, 600));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
