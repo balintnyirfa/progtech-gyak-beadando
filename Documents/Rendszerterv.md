@@ -50,16 +50,16 @@ A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesz
 
 | Teszt neve                          | Eredmény       |
 |-------------------------------------|----------------|
-| `Regisztráció helyes adatokkal`     |                |
-| `Regisztráció helytelen adatokkal`  |                |
+| `Regisztráció helyes adatokkal`     | Sikeres regisztráció |
+| `Regisztráció helytelen adatokkal`  | Sikertelen regisztráció |
 | `Bejelentkezés helyes adatokkal`    |                |
 | `Bejelentkezés helytelen adatokkal` |                |
 | `Naptár létrehozása`                | Sikeres létrehozás |
-| `Naptár megjelenítése`              |                |
-| `Esemény létrehozása`               |                |
+| `Naptár megjelenítése`              | Sikeres megjelenítés |
+| `Esemény létrehozása`               | Sikeres létrehozás |
 | `Esemény módosítása`                |                |
 | `Esemény törlése`                   |                |
-| `Események megjelenítése`           |                |
+| `Események megjelenítése`           | Sikeres megjelenítés |
 | `Kijelentkezés`                     |                |
 
 ## 9. Telepítési terv
