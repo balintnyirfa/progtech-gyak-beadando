@@ -9,10 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AddEventPage extends JDialog{
@@ -39,8 +38,9 @@ public class AddEventPage extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        startDateChooser.setDateFormatString("YYYY-MM-dd HH:mm");
-        endDateChooser.setDateFormatString("YYYY-MM-dd HH:mm");
+
+        //startDateChooser.setDateFormatString("YYYY-MM-dd HH:mm:ss");
+        //endDateChooser.setDateFormatString("YYYY-MM-dd HH:mm:ss");
         startDateJP.add(startDateChooser);
         endDateJP.add(endDateChooser);
         calendarAbstract = calendar;
@@ -79,11 +79,14 @@ public class AddEventPage extends JDialog{
             JOptionPane.showMessageDialog(this, "Az összes mezőt ki kell tölteni!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(from.getTime() > to.getTime()){
+            JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
         final String PASSWORD = "";
-
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement stm = conn.createStatement();

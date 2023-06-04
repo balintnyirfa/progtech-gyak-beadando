@@ -1,6 +1,7 @@
 package Calendar;
 
 import classes.AddEventCommand;
+import classes.DeleteEventCommand;
 import classes.Event;
 
 import java.util.*;
@@ -79,8 +80,8 @@ public abstract class CalendarAbstract extends Observable {
     }
     public void removeEvent(Event event){
         eventList.remove(event);
-        //setChanged();
-        //notifyObservers();
+        setChanged();
+        notifyObservers(new DeleteEventCommand(this, event));
     }
 
     public boolean hasEvent(Event event){

@@ -70,12 +70,15 @@ public class User implements Observer {
             actionWhenAddEvent(calendar, addEventCommand);
         }
         else if(arg instanceof DeleteEventCommand) {
-
+            DeleteEventCommand deleteEventCommand = (DeleteEventCommand) arg;
+            actionWhenRemoveEvent(calendar, deleteEventCommand);
         }
     }
 
     private void actionWhenAddEvent(CalendarAbstract calendarAbstract, AddEventCommand addEventCommand) {
         JOptionPane.showMessageDialog(null, addEventCommand.getCalendar().getTitle() + " nevű naptárba "+ addEventCommand.getEvent().getTitle() + " nevű eseményt töltöttél fel!", "For Observer", JOptionPane.PLAIN_MESSAGE);
     }
-
+    private void actionWhenRemoveEvent(CalendarAbstract calendarAbstract, DeleteEventCommand deleteEventCommand) {
+        JOptionPane.showMessageDialog(null, deleteEventCommand.getCalendar().getTitle() + " nevű naptárból "+ deleteEventCommand.getEvent().getTitle() + " nevű eseményt töröltél!", "For Observer", JOptionPane.PLAIN_MESSAGE);
+    }
 }

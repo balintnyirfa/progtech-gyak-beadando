@@ -17,4 +17,20 @@ public class DeleteEventCommand  implements ICommand {
     public void ExecuteEvent() {
         calendar.removeEvent(event);
     }
+
+    public CalendarAbstract getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(CalendarAbstract calendar) {
+        this.calendar = calendar;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 }
