@@ -54,7 +54,9 @@ A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesz
 | `Regisztráció helytelen adatokkal`  | Sikertelen regisztráció |
 | `Bejelentkezés helyes adatokkal`    |                |
 | `Bejelentkezés helytelen adatokkal` |                |
-| `Naptár létrehozása`                | Sikeres létrehozás |
+| `Naptár létrehozása megfelelő adatokkal` | Sikeres létrehozás |
+| `Naptár létrehozása hiányos adattal (cím)`| Sikertelen létrehozás|
+| `Naptár létrehozása nem megfelelő intervallummal/típussal`| Sikertelen létrehozás|
 | `Naptár megjelenítése`              | Sikeres megjelenítés |
 | `Esemény létrehozása`               | Sikeres létrehozás |
 | `Esemény módosítása`                |                |
