@@ -54,9 +54,6 @@ public class AddEventPage extends JDialog{
             public void actionPerformed(ActionEvent e) {
                 logger.info("Esemény hozzáadása gomb lenyomva.");
                 AddEventToDatabase(calendarAbstract);
-                dispose();
-                ListCalendarsPage ls = new ListCalendarsPage(null);
-                ls.setVisible(true);
             }
         });
         backButton.addActionListener(new ActionListener() {
@@ -137,5 +134,9 @@ public class AddEventPage extends JDialog{
         catch (Exception exception){
             logger.error("Hiba történt: " + exception.getMessage());
         }
+
+        dispose();
+        ListCalendarsPage ls = new ListCalendarsPage(null);
+        ls.setVisible(true);
     }
 }
