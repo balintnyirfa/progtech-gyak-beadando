@@ -40,7 +40,6 @@ public class RegisterPage extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 SignInPage signInPage = new SignInPage(null);
-                signInPage.setVisible(true);
             }
         });
     }
@@ -101,7 +100,6 @@ public class RegisterPage extends JDialog {
         if (user != null) {
             JOptionPane.showMessageDialog(this, "Sikeres regisztráció!");
             SignInPage signInPage = new SignInPage(null);
-            signInPage.setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Sikertelen regisztráció!", "Error", JOptionPane.ERROR_MESSAGE);

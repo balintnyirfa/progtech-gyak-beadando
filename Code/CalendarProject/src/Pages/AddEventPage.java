@@ -39,6 +39,8 @@ public class AddEventPage extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        startDateChooser.setDateFormatString("YYYY-MM-dd HH:mm");
+        endDateChooser.setDateFormatString("YYYY-MM-dd HH:mm");
         startDateJP.add(startDateChooser);
         endDateJP.add(endDateChooser);
         calendarAbstract = calendar;
@@ -65,10 +67,10 @@ public class AddEventPage extends JDialog{
         String content = eventContent.getText();
 
         java.util.Date startDate = startDateChooser.getDate();
-        java.sql.Date from = new java.sql.Date(startDate.getTime());
+        java.sql.Timestamp from = new java.sql.Timestamp(startDate.getTime());
 
         java.util.Date endDate = endDateChooser.getDate();
-        java.sql.Date to = new java.sql.Date(endDate.getTime());
+        java.sql.Timestamp to = new java.sql.Timestamp(endDate.getTime());
 
         if(title.isEmpty() || content.isEmpty()){
             JOptionPane.showMessageDialog(this, "Az összes mezőt ki kell tölteni!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -87,8 +89,8 @@ public class AddEventPage extends JDialog{
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, content);
             preparedStatement.setInt(3, calendarAbstract.getID());
-            preparedStatement.setDate(4, from);
-            preparedStatement.setDate(5, to);
+            preparedStatement.setTimestamp(4, from);
+            preparedStatement.setTimestamp(5, to);
 
             int addedRows = preparedStatement.executeUpdate();
             if (addedRows > 0) {

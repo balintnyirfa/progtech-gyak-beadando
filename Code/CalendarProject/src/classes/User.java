@@ -65,7 +65,7 @@ public class User implements Observer {
     public void update(Observable o, Object arg) {
         CalendarAbstract calendar = (CalendarAbstract) o;
         if(arg instanceof AddEventCommand){
-
+            System.out.println("Valami történik.");
         }
         else if(arg instanceof DeleteEventCommand) {
 

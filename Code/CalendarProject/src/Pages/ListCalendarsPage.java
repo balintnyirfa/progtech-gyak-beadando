@@ -30,7 +30,6 @@ public class ListCalendarsPage extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setForeground(Color.white);
         userId = SignInPage.user.getID();
-        System.out.println(userId);
         ListCalendars();
 
         visszaButton.addActionListener(new ActionListener() {
@@ -106,9 +105,14 @@ public class ListCalendarsPage extends JDialog {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int row = rl.GetSelectedRow();
-                    dispose();
-                    CalendarPage calendarPage = new CalendarPage(null, calendars.get(row));
-                    calendarPage.setVisible(true);
+                    try {
+                        CalendarPage calendarPage = new CalendarPage(null, calendars.get(row));
+                        calendarPage.setVisible(true);
+                        dispose();
+                    }
+                    catch (Exception exception){
+                        JOptionPane.showMessageDialog(null, "Nincs kiválasztva sor!");
+                    }
                 }
             });
 

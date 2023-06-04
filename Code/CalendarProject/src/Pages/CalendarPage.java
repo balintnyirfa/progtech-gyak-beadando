@@ -1,7 +1,6 @@
 package Pages;
 
 import Calendar.CalendarAbstract;
-import classes.Event;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -9,14 +8,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class CalendarPage extends  JDialog {
     private JButton addEvent;
     private JPanel calendarPage;
     private JTable eventsTable;
+    private JLabel titleText;
+    private JButton backButton;
     private CalendarAbstract calendarAbstract;
 
     public CalendarPage(JFrame parent, CalendarAbstract calendar){
@@ -28,6 +26,7 @@ public class CalendarPage extends  JDialog {
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         calendarAbstract = calendar;
+        titleText.setText(calendarAbstract.getTitle());
 
         ListEvents(calendarAbstract.getID());
         addEvent.addActionListener(new ActionListener() {
@@ -36,6 +35,14 @@ public class CalendarPage extends  JDialog {
                 dispose();
                 AddEventPage addEventPage = new AddEventPage(null, calendarAbstract);
                 addEventPage.setVisible(true);
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ListCalendarsPage lp = new ListCalendarsPage(null);
+                lp.setVisible(true);
             }
         });
     }
@@ -64,13 +71,13 @@ public class CalendarPage extends  JDialog {
             }
             model.setColumnIdentifiers(colName);
             String title, content;
-            Date from, to;
+            Timestamp from, to;
 
             while (rs.next()) {
                 title = rs.getString("title");
                 content = rs.getString("content");
-                from = rs.getDate("from_date");
-                to = rs.getDate("to_date");
+                from = rs.getTimestamp("from_date");
+                to = rs.getTimestamp("to_date");
                 Object[] row = {title, content, from, to};
                 model.addRow(row);
             }
