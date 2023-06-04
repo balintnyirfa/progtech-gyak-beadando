@@ -45,7 +45,6 @@ public class CreateCalendar extends JDialog{
     JDateChooser startDateChooser = new JDateChooser(cld.getTime()); //Dátum választó mai dátummal kezdőértékként.
     JDateChooser endDateChooser = new JDateChooser(cld.getTime());
 
-    private User user;
 
     public CreateCalendar(JFrame parent) {
         super(parent);
@@ -78,10 +77,6 @@ public class CreateCalendar extends JDialog{
     public void CreateACalendar()
     {
         // Naptár létrehozása
-        user = new User();
-        user.setID(SignInPage.user.getID());
-        user.setEmail(SignInPage.user.getEmail());
-        user.setUsername(SignInPage.user.getUsername());
 
         java.util.Date startDate = startDateChooser.getDate();
         java.sql.Date from_date = new java.sql.Date(startDate.getTime());
