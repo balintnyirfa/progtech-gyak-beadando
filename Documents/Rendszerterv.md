@@ -60,7 +60,6 @@ A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesz
 | `Naptár megjelenítése`              | Sikeres megjelenítés |
 | `Esemény létrehozása`               | Sikeres létrehozás |
 | `Esemény módosítása`                |                |
-| `Esemény törlése`                   |                |
 | `Események megjelenítése`           | Sikeres megjelenítés |
 | `Kijelentkezés`                     |                |
 

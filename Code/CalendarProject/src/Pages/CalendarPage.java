@@ -99,6 +99,7 @@ public class CalendarPage extends  JDialog {
                 model.addRow(row);
 
                 event.setID(id);
+                event.setTitle(title);
                 events.add(event);
             }
 
@@ -113,6 +114,9 @@ public class CalendarPage extends  JDialog {
                     int row = rl.GetSelectedRow();
                     try {
                         DeleteEvent(events.get(row));
+                        dispose();
+                        CalendarPage c = new CalendarPage(null, calendarAbstract);
+                        c.setVisible(true);
                     }catch (Exception exception){
                         JOptionPane.showMessageDialog(null, "Nincs kiválasztva sor!");
                     }
