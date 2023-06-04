@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Máj 29. 19:30
--- Kiszolgáló verziója: 10.4.27-MariaDB
--- PHP verzió: 8.2.0
+-- Létrehozás ideje: 2023. Jún 04. 15:03
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,9 +41,7 @@ CREATE TABLE `calendar` (
 --
 
 INSERT INTO `calendar` (`ID`, `user_id`, `type`, `from_date`, `to_date`, `title`) VALUES
-(1, 4, 'NAPI', '2023-05-29', '2023-05-29', 'asd'),
-(2, 4, 'HETI', '2023-05-29', '2023-06-05', 'asddsds'),
-(3, 4, 'HAVI', '2023-05-30', '2023-06-30', 'cckcgck,c');
+(14, 2, 'NAPI', '2023-06-04', '2023-06-04', 'Június negyedikei teendők');
 
 -- --------------------------------------------------------
 
@@ -53,14 +51,20 @@ INSERT INTO `calendar` (`ID`, `user_id`, `type`, `from_date`, `to_date`, `title`
 
 CREATE TABLE `event` (
   `ID` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
   `calendar_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` varchar(1000) DEFAULT NULL,
-  `status` int(1) NOT NULL,
-  `from_date` date NOT NULL,
-  `to_date` date NOT NULL
+  `from_date` datetime NOT NULL,
+  `to_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `event`
+--
+
+INSERT INTO `event` (`ID`, `calendar_id`, `title`, `content`, `from_date`, `to_date`) VALUES
+(29, 14, 'Progtech beadandó', 'Meg kell csinálni a beadandót', '2023-06-04 08:00:00', '2023-06-04 18:00:00'),
+(30, 14, 'Hálózat vizsga', 'Hálózat vizsgára készülés :)', '2023-06-04 09:00:00', '2023-06-04 14:00:00');
 
 -- --------------------------------------------------------
 
@@ -83,9 +87,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`ID`, `username`, `firstname`, `lastname`, `email`, `password`) VALUES
 (2, 'Nelli', 'Deli', 'Daniella', 'nelli@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
-(3, 'asd', 'asd', 'asd', 'lili@gmail.com', 'a8f5f167f44f4964e6c998dee827110c'),
-(4, 'Lili', 'Kiss', 'Lili', 'kl@gmail.com', 'abc0be56f538db4d8cbff4d1caf7980d'),
-(5, 'idk', 'idk', 'idk', 'idk@gmail.com', 'abc0be56f538db4d8cbff4d1caf7980d');
+(4, 'Lili', 'Kiss', 'Lili', 'kl@gmail.com', 'abc0be56f538db4d8cbff4d1caf7980d');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -103,8 +105,7 @@ ALTER TABLE `calendar`
 --
 ALTER TABLE `event`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_event_calendar` (`calendar_id`),
-  ADD KEY `FK_event_user` (`user_id`);
+  ADD KEY `FK_event_calendar` (`calendar_id`);
 
 --
 -- A tábla indexei `user`
@@ -120,19 +121,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT a táblához `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT a táblához `event`
 --
 ALTER TABLE `event`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -148,8 +149,7 @@ ALTER TABLE `calendar`
 -- Megkötések a táblához `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `FK_event_calendar` FOREIGN KEY (`calendar_id`) REFERENCES `calendar` (`ID`),
-  ADD CONSTRAINT `FK_event_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID`);
+  ADD CONSTRAINT `FK_event_calendar` FOREIGN KEY (`calendar_id`) REFERENCES `calendar` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
