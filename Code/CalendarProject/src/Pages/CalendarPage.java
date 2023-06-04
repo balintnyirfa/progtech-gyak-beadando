@@ -4,6 +4,7 @@ import Calendar.CalendarAbstract;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,21 +56,20 @@ public class CalendarPage extends  JDialog {
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-
             Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM event WHERE calendar_id = ?";
+
+            String sql = "SELECT title, content, from_date, to_date FROM event WHERE calendar_id = ?";
+
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, calendarId);
 
             ResultSet rs = preparedStatement.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
+
             DefaultTableModel model = (DefaultTableModel) eventsTable.getModel();
-            int cols = rsmd.getColumnCount()-2;
-            String[] colName = new String[cols];
-            for (int i = 0; i < cols; i++) {
-                colName[i] = rsmd.getColumnName(i+1);
-            }
+            String[] colName = new String[]{"Cím", "Leírás", "Kezdeti dátum", "Vég dátum"};
             model.setColumnIdentifiers(colName);
+
             String title, content;
             Timestamp from, to;
 

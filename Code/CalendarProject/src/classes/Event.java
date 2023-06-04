@@ -1,4 +1,5 @@
 package classes;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Event {
@@ -6,8 +7,8 @@ public class Event {
     private int calendar_id;
     private String title;
     private String content;
-    private Date from;
-    private Date to;
+    private Timestamp from;
+    private Timestamp to;
 
     public int getCalendar_id() {
         return calendar_id;
@@ -33,19 +34,19 @@ public class Event {
         this.content = content;
     }
 
-    public Date getFrom() {
+    public Timestamp getFrom() {
         return from;
     }
 
-    public void setFrom(Date from) {
+    public void setFrom(Timestamp from) {
         this.from = from;
     }
 
-    public Date getTo() {
+    public Timestamp getTo() {
         return to;
     }
 
-    public void setTo(Date to) {
+    public void setTo(Timestamp to) {
         this.to = to;
     }
 

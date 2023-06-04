@@ -56,15 +56,11 @@ public class ListCalendarsPage extends JDialog {
             preparedStatement.setInt(1, userId);
 
             ResultSet rs = preparedStatement.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
             DefaultTableModel model = (DefaultTableModel) CalendarsTable.getModel();
 
-            int cols = rsmd.getColumnCount() - 1;
-            String[] colName = new String[cols];
-            for (int i = 0; i < cols; i++) {
-                colName[i] = rsmd.getColumnName(i + 1);
-            }
+            String[] colName = new String[]{"Cím", "Típus"};
             model.setColumnIdentifiers(colName);
+
             String type, title;
             int id;
             List<CalendarAbstract> calendars = new ArrayList<>();
@@ -106,9 +102,9 @@ public class ListCalendarsPage extends JDialog {
                 public void actionPerformed(ActionEvent e) {
                     int row = rl.GetSelectedRow();
                     try {
+                        dispose();
                         CalendarPage calendarPage = new CalendarPage(null, calendars.get(row));
                         calendarPage.setVisible(true);
-                        dispose();
                     }
                     catch (Exception exception){
                         JOptionPane.showMessageDialog(null, "Nincs kiválasztva sor!");

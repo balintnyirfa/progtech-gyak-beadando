@@ -21,14 +21,19 @@
           <text value="Esemény hozzáadása"/>
         </properties>
       </component>
-      <component id="bf914" class="javax.swing.JTable" binding="eventsTable">
+      <scrollpane id="7fe8">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
-      </component>
+        <border type="none"/>
+        <children>
+          <component id="bf914" class="javax.swing.JTable" binding="eventsTable">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
       <component id="22da8" class="javax.swing.JLabel" binding="titleText">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -38,12 +43,12 @@
           <text value="CÍM"/>
         </properties>
       </component>
-      <component id="27e64" class="javax.swing.JButton" binding="backButton">
+      <component id="26d19" class="javax.swing.JButton" binding="backButton">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Vissza a Naptárakhoz"/>
+          <text value="Vissza a naptárakhoz"/>
         </properties>
       </component>
     </children>
