@@ -83,5 +83,7 @@ public abstract class CalendarAbstract extends Observable {
         //notifyObservers();
     }
 
-
+    public boolean hasEvent(Event event){
+        return eventList.contains(event);
+    }
 }
