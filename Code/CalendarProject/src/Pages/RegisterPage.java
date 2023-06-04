@@ -8,19 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class RegisterPage extends JDialog{
-    private JTextField usernameText;
-    private JTextField firstnameText;
-    private JTextField lastnameText;
-    private JTextField emailText;
-    private JPasswordField passwordText;
+public class RegisterPage extends JDialog {
+    public JTextField usernameText;
+    public JTextField firstnameText;
+    public JTextField lastnameText;
+    public JTextField emailText;
+    public JPasswordField passwordText;
     private JButton registerButton;
     private JPanel RegisterPanel;
-    private JPasswordField passwordConfirm;
+    public JPasswordField passwordConfirm;
     private JButton backButton;
     public User user;
 
-    public RegisterPage(JFrame parent){
+    public RegisterPage(JFrame parent) {
         super(parent);
         setTitle("Hozz létre egy új felhasználót!");
         setContentPane(RegisterPanel);
@@ -44,7 +44,8 @@ public class RegisterPage extends JDialog{
             }
         });
     }
-    private void registerUser(){
+
+    public void registerUser() {
         String Email = emailText.getText();
         String Username = usernameText.getText();
         String Firstname = firstnameText.getText();
@@ -52,69 +53,58 @@ public class RegisterPage extends JDialog{
         String Password = String.valueOf(passwordText.getPassword());
         String ConfirmPassword = String.valueOf(passwordConfirm.getPassword());
 
-        if(Email.isEmpty() || Username.isEmpty() || Firstname.isEmpty()
-                || Lastname.isEmpty() || Password.isEmpty() || ConfirmPassword.isEmpty()){
+        if (Email.isEmpty() || Username.isEmpty() || Firstname.isEmpty()
+                || Lastname.isEmpty() || Password.isEmpty() || ConfirmPassword.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Az összes mezőt ki kell tölteni!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(!Password.equals(ConfirmPassword)){
+        if (!Password.equals(ConfirmPassword)) {
             JOptionPane.showMessageDialog(this, "A beírt két jelszó nem egyezik!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        user = addUserToDatabase(Username, Email, Firstname, Lastname, Password);
-
-        if(user != null){
-            JOptionPane.showMessageDialog(this, "Sikeres regisztráció!");
-            SignInPage signInPage = new SignInPage(null);
-            signInPage.setVisible(true);
-            dispose();
+        if(!Email.contains("@")){
+            JOptionPane.showMessageDialog(this, "A beírt email nem valós!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        else {
-            JOptionPane.showMessageDialog(this, "Sikertelen regisztráció!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
-    private User addUserToDatabase(String username, String email, String firstname, String lastname, String password) {
-        User user = null;
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
         final String PASSWORD = "";
 
-        try{
+        try {
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement stm = conn.createStatement();
             String sql = "INSERT INTO user(username, email, firstname, lastname, password) VALUES (?,?,?,?, md5(?))";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, firstname);
-            preparedStatement.setString(4, lastname);
-            preparedStatement.setString(5, password);
+            preparedStatement.setString(1, Username);
+            preparedStatement.setString(2, Email);
+            preparedStatement.setString(3, Firstname);
+            preparedStatement.setString(4, Lastname);
+            preparedStatement.setString(5, Password);
 
             int addedRows = preparedStatement.executeUpdate();
-            if(addedRows > 0){
+            if (addedRows > 0) {
                 user = new User();
-                user.setUsername(username);
-                user.setEmail(email);
-                user.setFirstname(firstname);
-                user.setLastname(lastname);
-                user.setPassword(password);
+                user.setUsername(Username);
+                user.setEmail(Email);
+                user.setFirstname(Firstname);
+                user.setLastname(Lastname);
+                user.setPassword(Password);
             }
             stm.close();
             conn.close();
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
 
-        return user;
-    }
 
-    public static void main(String[] args) {
-
-        RegisterPage reg = new RegisterPage(null);
-        reg.setVisible(true);
-
+        if (user != null) {
+            JOptionPane.showMessageDialog(this, "Sikeres regisztráció!");
+            SignInPage signInPage = new SignInPage(null);
+            signInPage.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sikertelen regisztráció!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
