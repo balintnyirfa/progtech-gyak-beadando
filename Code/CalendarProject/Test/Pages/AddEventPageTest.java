@@ -18,7 +18,7 @@ public class AddEventPageTest extends TestCase {
         addEventPage.eventContent.setText("Content");
         addEventPage.startDateChooser.setDate(start);
         addEventPage.endDateChooser.setDate(end);
-        addEventPage.AddEventToDatabase();
+        addEventPage.AddEventToDatabase(calendar);
     }
     public void testAddEvent_WithEmptyField(){
         java.sql.Timestamp start = java.sql.Timestamp.valueOf("2007-09-23 10:10:10.0");
@@ -30,6 +30,6 @@ public class AddEventPageTest extends TestCase {
         addEventPage.eventContent.setText("");
         addEventPage.startDateChooser.setDate(start);
         addEventPage.endDateChooser.setDate(end);
-        addEventPage.AddEventToDatabase();
+        addEventPage.AddEventToDatabase(calendar);
     }
 }

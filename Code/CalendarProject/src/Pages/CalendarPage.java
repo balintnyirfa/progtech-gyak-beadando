@@ -25,6 +25,7 @@ public class CalendarPage extends  JDialog {
     private JLabel titleText;
     private JButton backButton;
     private JButton deleteEventButton;
+    private JScrollPane dataPanel;
     private CalendarAbstract calendarAbstract;
 
     public CalendarPage(JFrame parent, CalendarAbstract calendar){
@@ -55,6 +56,7 @@ public class CalendarPage extends  JDialog {
                 lp.setVisible(true);
             }
         });
+
     }
 
     private void ListEvents(int calanderId){
@@ -76,6 +78,10 @@ public class CalendarPage extends  JDialog {
             DefaultTableModel model = (DefaultTableModel) eventsTable.getModel();
             String[] colName = new String[]{"Cím", "Leírás", "Kezdeti dátum", "Vég dátum"};
             model.setColumnIdentifiers(colName);
+
+            eventsTable.revalidate();
+            eventsTable.repaint();
+
 
             String title, content;
             Timestamp from, to;
@@ -110,12 +116,14 @@ public class CalendarPage extends  JDialog {
                     }catch (Exception exception){
                         JOptionPane.showMessageDialog(null, "Nincs kiválasztva sor!");
                     }
+
                 }
             });
 
         }catch (Exception e) {
             e.printStackTrace();
         }
+
     }
     private void DeleteEvent(Event event){
         try {
@@ -131,6 +139,9 @@ public class CalendarPage extends  JDialog {
 
             DeleteEventCommand d = new DeleteEventCommand(calendarAbstract, event);
             d.ExecuteEvent();
+            dataPanel.revalidate();
+            eventsTable.revalidate();       //nem működik valamiért
+            eventsTable.repaint();
         }
         catch (Exception e) {
             e.printStackTrace();

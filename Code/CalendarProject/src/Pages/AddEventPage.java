@@ -13,6 +13,9 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import Calendar.*;
+
+import static Pages.SignInPage.user;
 
 public class AddEventPage extends JDialog{
 
@@ -48,7 +51,7 @@ public class AddEventPage extends JDialog{
         eventAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddEventToDatabase();
+                AddEventToDatabase(calendarAbstract);
                 dispose();
                 ListCalendarsPage ls = new ListCalendarsPage(null);
                 ls.setVisible(true);
@@ -64,8 +67,9 @@ public class AddEventPage extends JDialog{
         });
     }
 
-    public void AddEventToDatabase(){
+    public void AddEventToDatabase(CalendarAbstract calendar){
         Event event = null;
+        //calendar = calendarAbstract;
         String title = eventTitle.getText();
         String content = eventContent.getText();
 
@@ -80,6 +84,23 @@ public class AddEventPage extends JDialog{
             return;
         }
         if(from.getTime() > to.getTime()){
+            JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        long daysBetween = (to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24);
+        if (calendar.getType() == CalendarTypeEnum.NAPI && !from.equals(to))
+        {
+            JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if (calendar.getType() == CalendarTypeEnum.HETI && !(daysBetween == 7))
+        {
+            JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if (calendar.getType() == CalendarTypeEnum.HAVI && !(daysBetween == 30 || daysBetween == 31))
+        {
             JOptionPane.showMessageDialog(this, "Nem megfelelő intervallum", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
