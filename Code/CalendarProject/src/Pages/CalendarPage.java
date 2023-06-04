@@ -5,6 +5,7 @@ import classes.DeleteEventCommand;
 import classes.RowListener;
 import classes.TableRowClickListener;
 import classes.Event;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarPage extends  JDialog {
+    final static Logger logger = Logger.getLogger(CalendarPage.class);
     final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
     final String USERNAME = "root";
     final String PASSWORD = "";
@@ -43,6 +45,7 @@ public class CalendarPage extends  JDialog {
         addEvent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                logger.info("Esemény hozzáadásához vezető gomb lenyomva.");
                 dispose();
                 AddEventPage addEventPage = new AddEventPage(null, calendarAbstract);
                 addEventPage.setVisible(true);
@@ -111,6 +114,7 @@ public class CalendarPage extends  JDialog {
             deleteEventButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    logger.info("Esemény törlése gomb lenyomva.");
                     int row = rl.GetSelectedRow();
                     try {
                         DeleteEvent(events.get(row));
@@ -125,7 +129,7 @@ public class CalendarPage extends  JDialog {
             });
 
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Hiba történt: " + e.getMessage());
         }
 
     }
@@ -148,7 +152,7 @@ public class CalendarPage extends  JDialog {
             eventsTable.repaint();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Hiba történt: " + e.getMessage());
         }
     }
 }

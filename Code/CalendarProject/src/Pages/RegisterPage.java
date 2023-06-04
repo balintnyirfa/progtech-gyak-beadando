@@ -7,8 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import org.apache.log4j.*;
 
 public class RegisterPage extends JDialog {
+    final static Logger logger = Logger.getLogger(RegisterPage.class);
     public JTextField usernameText;
     public JTextField firstnameText;
     public JTextField lastnameText;
@@ -32,6 +34,7 @@ public class RegisterPage extends JDialog {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                logger.info("Regisztráció gomb lenyomva.");
                 registerUser();
             }
         });
@@ -93,7 +96,7 @@ public class RegisterPage extends JDialog {
             stm.close();
             conn.close();
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            logger.error("Hiba történt: " + exception.getMessage());
         }
 
 

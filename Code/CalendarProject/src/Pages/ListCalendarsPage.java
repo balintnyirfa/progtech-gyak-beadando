@@ -2,6 +2,7 @@ package Pages;
 
 import Calendar.*;
 import classes.*;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListCalendarsPage extends JDialog {
+    final static Logger logger = Logger.getLogger(ListCalendarsPage.class);
     private JPanel ListCalendarsPanel;
     private JTable CalendarsTable;
     private JButton visszaButton;
@@ -105,6 +107,7 @@ public class ListCalendarsPage extends JDialog {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int row = rl.GetSelectedRow();
+                    logger.info("Naptár kiválasztás gomb lenyomva.");
                     try {
                         calendars.get(row).addObserver(user);
                         CalendarPage calendarPage = new CalendarPage(null, calendars.get(row));
@@ -118,7 +121,7 @@ public class ListCalendarsPage extends JDialog {
             });
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Hiba történt: " + e.getMessage());
         }
     }
 }

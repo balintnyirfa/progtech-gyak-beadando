@@ -14,11 +14,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import Calendar.*;
+import org.apache.log4j.Logger;
 
 import static Pages.SignInPage.user;
 
 public class AddEventPage extends JDialog{
-
+    final static Logger logger = Logger.getLogger(AddEventPage.class);
     private JPanel createEvent;
     public JTextField eventTitle;
     public JTextField eventContent;
@@ -51,6 +52,7 @@ public class AddEventPage extends JDialog{
         eventAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                logger.info("Esemény hozzáadása gomb lenyomva.");
                 AddEventToDatabase(calendarAbstract);
                 dispose();
                 ListCalendarsPage ls = new ListCalendarsPage(null);
@@ -133,7 +135,7 @@ public class AddEventPage extends JDialog{
             conn.close();
         }
         catch (Exception exception){
-            System.out.println(exception.getMessage());
+            logger.error("Hiba történt: " + exception.getMessage());
         }
     }
 }
