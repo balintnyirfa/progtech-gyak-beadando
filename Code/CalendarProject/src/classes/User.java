@@ -2,6 +2,7 @@ package classes;
 
 import Calendar.CalendarAbstract;
 
+import java.util.AbstractCollection;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -65,10 +66,15 @@ public class User implements Observer {
     public void update(Observable o, Object arg) {
         CalendarAbstract calendar = (CalendarAbstract) o;
         if(arg instanceof AddEventCommand){
-            System.out.println("Valami történik.");
+            AddEventCommand addEventCommand = (AddEventCommand)arg;
+            actionWhenAddEvent(calendar, addEventCommand);
         }
         else if(arg instanceof DeleteEventCommand) {
 
         }
+    }
+
+    private void actionWhenAddEvent(CalendarAbstract calendarAbstract, AddEventCommand addEventCommand) {
+        System.out.printf(calendarAbstract.getTitle() + " című naptárba " + addEventCommand.event.getTitle() + " nevű eseményt töltöttek fel");
     }
 }

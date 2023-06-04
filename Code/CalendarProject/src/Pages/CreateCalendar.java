@@ -104,6 +104,7 @@ public class CreateCalendar extends JDialog{
         {
             CalendarFactory dailyCalendarFactory = new DailyCalendarFactory();
             CalendarAbstract dailyCalendar = dailyCalendarFactory.createCalendar(user.getID());
+            dailyCalendar.addObserver(user);
             dailyCalendar.addCalendarToDatabase(
                     user.getID(),
                     comboBox.getModel().getSelectedItem().toString(),
@@ -118,6 +119,7 @@ public class CreateCalendar extends JDialog{
         {
             CalendarFactory weeklyCalendarFactory = new WeeklyCalendarFactory();
             CalendarAbstract weeklyCalendar = weeklyCalendarFactory.createCalendar(user.getID());
+            weeklyCalendar.addObserver(user);
             weeklyCalendar.addCalendarToDatabase(
                     user.getID(),
                     comboBox.getModel().getSelectedItem().toString(),
@@ -126,12 +128,12 @@ public class CreateCalendar extends JDialog{
                     title
             );
             createSuccessOrFail(weeklyCalendar);
-
         }
         else if (comboBox.getModel().getSelectedItem() == "HAVI" && (daysBetween == 30 || daysBetween == 31))
         {
             CalendarFactory monthlyCalendarFactory = new MonthlyCalendarFactory();
             CalendarAbstract monthlyCalendar = monthlyCalendarFactory.createCalendar(user.getID());
+            monthlyCalendar.addObserver(user);
             monthlyCalendar.addCalendarToDatabase(
                     user.getID(),
                     comboBox.getModel().getSelectedItem().toString(),
@@ -149,7 +151,6 @@ public class CreateCalendar extends JDialog{
 
 
         //cal = addCalendarToDatabase(user.getID(), comboBox.getModel().getSelectedItem().toString(), from_date, to_date, title);
-
     }
 
     private void createSuccessOrFail(CalendarAbstract calendar)

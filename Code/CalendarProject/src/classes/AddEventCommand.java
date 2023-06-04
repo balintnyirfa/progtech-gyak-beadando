@@ -6,7 +6,7 @@ import classes.ICommand;
 
 public class AddEventCommand implements ICommand {
     private CalendarAbstract calendar;
-    private Event event;
+    public Event event;
 
     public AddEventCommand(CalendarAbstract calendar, Event event) {
         this.calendar = calendar;

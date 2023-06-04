@@ -1,5 +1,6 @@
 package Calendar;
 
+import classes.AddEventCommand;
 import classes.Event;
 
 import java.util.*;
@@ -68,13 +69,13 @@ public abstract class CalendarAbstract extends Observable {
 
     public abstract CalendarAbstract addCalendarToDatabase(int user_id, String type, java.sql.Date from_date, java.sql.Date to_date, String title);
 
+    //List<Observer> observersList = new ArrayList<>();
     List<Event> eventList = new ArrayList<>();
 
     public void addEvent(Event event){
         eventList.add(event);
-        System.out.println("Új esemény hozzáadva");
         setChanged();
-        notifyObservers();
+        notifyObservers(new AddEventCommand(this, event));
     }
     public void removeEvent(Event event){
         eventList.remove(event);

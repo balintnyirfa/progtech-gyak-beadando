@@ -102,8 +102,8 @@ public class ListCalendarsPage extends JDialog {
                 public void actionPerformed(ActionEvent e) {
                     int row = rl.GetSelectedRow();
                     try {
-                        dispose();
                         CalendarPage calendarPage = new CalendarPage(null, calendars.get(row));
+                        dispose();
                         calendarPage.setVisible(true);
                     }
                     catch (Exception exception){

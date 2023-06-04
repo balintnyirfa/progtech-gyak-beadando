@@ -49,6 +49,9 @@ public class AddEventPage extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddEventToDatabase();
+                dispose();
+                ListCalendarsPage ls = new ListCalendarsPage(null);
+                ls.setVisible(true);
             }
         });
         backButton.addActionListener(new ActionListener() {
