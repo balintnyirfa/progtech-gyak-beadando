@@ -31,7 +31,7 @@ import static Pages.SignInPage.user;
 public class CreateCalendar extends JDialog{
 
     private JPanel CreateCalendarPanel;
-    private JTextField calendarTitle;
+    public JTextField calendarTitle;
 
     JComboBox<String> comboBox;
 
@@ -75,7 +75,7 @@ public class CreateCalendar extends JDialog{
         });
     }
 
-    private void CreateACalendar()
+    public void CreateACalendar()
     {
         // Naptár létrehozása
         user = new User();
@@ -155,7 +155,7 @@ public class CreateCalendar extends JDialog{
         //cal = addCalendarToDatabase(user.getID(), comboBox.getModel().getSelectedItem().toString(), from_date, to_date, title);
     }
 
-    private void createSuccessOrFail(CalendarAbstract calendar)
+    public void createSuccessOrFail(CalendarAbstract calendar)
     {
         if (calendar != null) {
             JOptionPane.showMessageDialog(this, "Sikeres létrehozás!");
