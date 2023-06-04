@@ -80,7 +80,6 @@ public class SignInPage extends JDialog{
 
     public static User user;
     private User getAuthenticatedUser(String email, String password) {
-
         final String DB_URL = "jdbc:mysql://localhost/calendar?serverTimezone=UTC";
         final String USERNAME = "root";
         final String PASSWORD = "";
@@ -117,7 +116,6 @@ public class SignInPage extends JDialog{
 
     public static void main(String[] args) {
         SignInPage signInPage = new SignInPage(null);
-        User user = signInPage.user;
 
         if (user != null) {
             System.out.printf("Sikeres bejelentkezés! \n" +

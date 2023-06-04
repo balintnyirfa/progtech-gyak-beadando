@@ -16,8 +16,6 @@ import java.util.Calendar;
 import Calendar.*;
 import org.apache.log4j.Logger;
 
-import static Pages.SignInPage.user;
-
 public class AddEventPage extends JDialog{
     final static Logger logger = Logger.getLogger(AddEventPage.class);
     private JPanel createEvent;
@@ -136,7 +134,7 @@ public class AddEventPage extends JDialog{
         }
 
         dispose();
-        ListCalendarsPage ls = new ListCalendarsPage(null);
-        ls.setVisible(true);
+        CalendarPage cp = new CalendarPage(null, calendarAbstract);
+        cp.setVisible(true);
     }
 }
