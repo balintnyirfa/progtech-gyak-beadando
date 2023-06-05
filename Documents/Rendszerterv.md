@@ -61,7 +61,7 @@ A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesz
 | `Esemény létrehozása`               | Sikeres létrehozás |
 | `Esemény törlése`                | Sikeres törlés |
 | `Események megjelenítése`           | Sikeres megjelenítés |
-| `Kijelentkezés`                     |                |
+| `Kijelentkezés`                     | Sikeres kijelentkezés |
 
 ## 9. Telepítési terv
 Nem szükséges telepítés az alkalmazás használatához.
