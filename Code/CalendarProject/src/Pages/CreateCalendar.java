@@ -14,6 +14,8 @@ import Calendar.CalendarTypeEnum;
 import Calendar.DailyCalendarFactory;
 import Calendar.WeeklyCalendarFactory;
 import Calendar.MonthlyCalendarFactory;
+import org.apache.log4j.Logger;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.Authenticator;
@@ -30,6 +32,7 @@ import static Pages.SignInPage.user;
 
 public class CreateCalendar extends JDialog{
 
+    final static Logger logger = Logger.getLogger(CreateCalendar.class);
     private JPanel CreateCalendarPanel;
     public JTextField calendarTitle;
 
@@ -60,6 +63,7 @@ public class CreateCalendar extends JDialog{
         createCalendar_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                logger.info("Naptár létrehozása gomb lenyomva.");
                 CreateACalendar();
             }
         });

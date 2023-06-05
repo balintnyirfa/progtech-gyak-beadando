@@ -1,11 +1,15 @@
 package Pages;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomePage extends JDialog{
+
+    final static Logger logger = Logger.getLogger(HomePage.class);
     private JButton ownCalendarButton;
     private JButton createNewCalendarButton;
     private JPanel homePanel;
@@ -42,6 +46,7 @@ public class HomePage extends JDialog{
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                logger.info("A felhasználó kijelentkezett.");
                 dispose();
             }
         });

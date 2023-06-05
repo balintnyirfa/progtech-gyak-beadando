@@ -1,10 +1,13 @@
 package Calendar;
 
 import Calendar.CalendarAbstract;
+import Pages.CreateCalendar;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 
 public class WeeklyCalendar extends CalendarAbstract {
+    final static Logger logger = Logger.getLogger(WeeklyCalendar.class);
     public WeeklyCalendar(int user_id) {
         super(user_id);
     }
@@ -40,7 +43,8 @@ public class WeeklyCalendar extends CalendarAbstract {
             conn.close();
         }
         catch (Exception exception){
-            System.out.println(exception.getMessage());
+            //System.out.println(exception.getMessage());
+            logger.error("Sikertelen heti naptár létrehozása.");
         }
 
         return cal;

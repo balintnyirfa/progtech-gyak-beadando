@@ -1,12 +1,16 @@
 package Calendar;
 
 import Calendar.CalendarAbstract;
+import Pages.CreateCalendar;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 
 import static Pages.SignInPage.user;
 
 public class MonthlyCalendar extends CalendarAbstract {
+
+    final static Logger logger = Logger.getLogger(MonthlyCalendar.class);
     public MonthlyCalendar(int user_id) {
         super(user_id);
     }
@@ -42,7 +46,8 @@ public class MonthlyCalendar extends CalendarAbstract {
             conn.close();
         }
         catch (Exception exception){
-            System.out.println(exception.getMessage());
+            //System.out.println(exception.getMessage());
+            logger.error("Sikertelen havi naptár létrehozás.");
         }
 
         return cal;
