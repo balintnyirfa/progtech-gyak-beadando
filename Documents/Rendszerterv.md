@@ -59,7 +59,7 @@ A tesztek elsődleges célja az eddig meglévő funkcióknak, metódusoknak tesz
 | `Naptár létrehozása nem megfelelő intervallummal/típussal`| Sikertelen létrehozás|
 | `Naptár megjelenítése`              | Sikeres megjelenítés |
 | `Esemény létrehozása`               | Sikeres létrehozás |
-| `Esemény módosítása`                |                |
+| `Esemény törlése`                | Sikeres törlés |
 | `Események megjelenítése`           | Sikeres megjelenítés |
 | `Kijelentkezés`                     |                |
 
